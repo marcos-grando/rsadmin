@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ContextAside from './utilities/contexts/ContextAside.jsx';
-import ContextMessage from './utilities/contexts/contextMessage.jsx';
+import ContextMessage from './utilities/contexts/ContextMessage.jsx';
 import ContextConfirm from './utilities/contexts/ContextConfirm.jsx';
 import './utilities/styles/style.scss';
 import App from './App.jsx';
