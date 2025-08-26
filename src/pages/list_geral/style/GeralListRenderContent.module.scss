@@ -1,0 +1,190 @@
+@use "../../../utilities/styles/variables" as *;
+
+@keyframes moveLeftOpen {
+    from { transform: translateX(-2rem); }
+    to { transform: translateX(-0.5rem); }
+}
+@keyframes h2MoveLeftOpen {
+    from { transform: translateX(0); }
+    to { transform: translateX(2rem); }
+}
+@keyframes h2MoveLeftClose {
+    from { transform: translateX(2rem); }
+    to { transform: translateX(0); }
+}
+
+.constList {
+    min-height: 0;
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .wrapper {
+        background-color: var(--terciary-3);
+        box-shadow: -4px 2px 12px var(--terciary-2);
+        border: 1px solid $list_border;
+        min-height: 0;
+        width: 100%; max-width: $max_container;
+        margin: 0 auto;
+
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+
+        .bossTitle {
+            background-color: var(--primary-1);
+            border-bottom: 1px solid $list_border;
+            width: 100%;
+            padding: 1rem 2rem;
+
+            color: var(--secondary-2);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
+.theTitleList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+
+    position: relative;
+
+    .moveLeft {
+        border-radius: 50%;
+        height: 1.75rem; width: 1.75rem;
+        padding: 0.25rem;
+
+        color: var(--secondary-4);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: 0; left: 0;
+        animation: moveLeftOpen 350ms ease-out 1 forwards;
+
+        cursor: pointer;
+        transition: background-color 150ms ease-out, color 150ms ease-out;
+
+        &:hover {
+            background-color: var(--primary-2);
+            color: var(--secondary-1);
+        }
+    }
+    h2 {
+        font-size: 1.25rem;
+        font-weight: 500;
+
+        &.open { animation: h2MoveLeftOpen 350ms ease-out 1 forwards; }
+        &.close { animation: h2MoveLeftClose 350ms ease-out 1 forwards; }
+    }
+}
+.toggleSpace {
+    height: 100% !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    button {
+        background-color: var(--secondary-5);
+        border: 1px solid $list_border;
+        border-radius: 50px;
+        height: 100%;
+        padding: 0 1rem;
+
+        color: var(--secondary-4);
+        
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+
+        &:hover {
+            color: var(--secondary-1);
+
+            &::after {
+                content: "";
+                height: 100%; width: 100%;
+                background-color: var(--terciary-1);
+                position: absolute;
+                top: 0; left: 0;   
+            }
+        }
+    }
+}
+.inputSpace {
+    background-color: var(--secondary-5);
+    border: 1px solid $list_border;
+    border-radius: 50px;
+    height: 100%;
+
+    color: var(--secondary-4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    svg {
+        margin: 0 10px 0 5px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .inpuText {
+        background: none;
+        border: none;
+        outline: none;
+        height: 100%;
+        padding: 7px 10px 7px 15px;
+
+        font-size: 0.75em;
+
+        transition: background-color 250ms;
+
+        &:hover {
+            background-color: var(--terciary-1);
+        }
+        &:focus {
+            background-color: var(--terciary-2);
+        }
+    }
+}
+
+.details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .backButton {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        color: #007bff;
+        padding: 0;
+        align-self: flex-start;
+        transition: color 0.2s;
+
+        &:hover {
+            color: #0056b3;
+        }
+    }
+
+    .subTitle {
+        font-size: 1.5rem;
+        color: #222;
+        margin: 0;
+    }
+}

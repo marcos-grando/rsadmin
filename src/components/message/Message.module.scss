@@ -1,0 +1,82 @@
+@use "../../utilities/styles/variables" as *;
+
+:root {
+    --warning: rgba(128, 84, 27, 0.144);
+    --sucess: rgba(10, 75, 32, 0.144);
+    --error: rgba(75, 12, 10, 0.144);
+    --txtWarning: #c97719e8;
+    --txtSucess: #257536e8;
+    --txtError: #752825e8;
+}
+
+@keyframes upWindow {
+    from {
+        bottom: -30%;
+    } to {
+        bottom: 20%;
+    }
+}
+@keyframes downWindow {
+    from {
+        bottom: 20%;
+    } to {
+        bottom: -30%;
+    }
+}
+
+.messageWindow {
+    background-color: var(--primary-1);
+    border: 2px solid;
+    border-radius: 15px;
+
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+
+    overflow: hidden;
+    z-index: 10001;
+    animation: upWindow 450ms ease-out 1 forwards;
+    &.closeWindow { animation: downWindow 450ms ease-out 1 forwards; }
+
+    .content {
+        height: 100%; width: 100%;
+        padding: 1.75rem 2.5rem;
+
+        color: var(--secondary-2);
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        &.warning {
+            background: linear-gradient(180deg, var(--warning), transparent);
+            h2, span { color: var(--txtWarning); }
+        }
+        &.sucess {
+            background: linear-gradient(180deg, var(--sucess), transparent);
+            h2, span { color: var(--txtSucess); }
+        }
+        &.error {
+            background: linear-gradient(180deg, var(--error), transparent);
+            h2, span { color: var(--txtError); }    
+        }
+    }
+
+    svg {
+        color: var(--secondary-4);
+        position: absolute;
+        top: 0.5rem; right: 0.5rem;
+        cursor: pointer;
+        transition: scale 250ms ease-out, color 250ms ease-out;
+
+        &:hover {
+            scale: .95;
+            color: var(--secondary-2);
+        }
+    }
+    h2 { font-size: 1.5rem; }
+    p { font-size: 1rem; }
+}

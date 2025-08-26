@@ -1,0 +1,119 @@
+@use "../../../../../utilities/styles/variables" as *;
+
+$bgInputs: var(--terciary-2);
+$bgInputsHover: var(--terciary-1);
+
+$borderInputs: var(--secondary-5);
+$borderInputsHover: var(--secondary-4);
+$borderInputsFocus: var(--secondary-3);
+
+$distanceTxtInput: 7px;
+
+.step2, .step3 {
+    min-height: 0; width: 100%;
+    padding: 1rem 2rem;
+    flex: 1 !important;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(4, 4rem);
+    row-gap: 0.75rem;
+    column-gap: 1rem;
+}
+.step2 {
+
+    .theMap {
+        // border: 1px solid red;
+        grid-column: 7 / 11;
+        grid-row: 1 / span 4;
+
+        height: 100%; width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: grab;
+        overflow: hidden;
+        position: relative;
+        
+        & > div:first-of-type > div:last-of-type {
+            display: none;
+        }
+        input {
+            background-color: rgb(3, 39, 53);
+            box-shadow: -4px 4px 8px rgba(1, 22, 34, 0.514);
+            border: 2px solid rgba(2, 37, 51, 0.76);
+            border-radius: 50px;
+            width: 96%;
+            padding: 9px 10px 9px 22px;
+
+            color: var(--secondary-4);
+            font-size: 0.85em;
+
+            position: absolute;
+            bottom: 1rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    .theInput:nth-of-type(1) {
+        grid-column: 1 / 5;
+        grid-row: 1;
+    }
+    .theInput:nth-of-type(2) {
+        grid-column: 5 / 6;
+        grid-row: 1;
+    }
+    .theInput:nth-of-type(3) {
+        grid-column: 6 / 7;
+        grid-row: 1;
+    }
+    .theInput:nth-of-type(4) {
+        grid-column: 1 / 7;
+        grid-row: 2;
+    }
+    .theInput:nth-of-type(5) {
+        grid-column: 1 / 7;
+        grid-row: 3;
+    }
+    .theInput:nth-of-type(6) {
+        grid-column: 1 / 6;
+        grid-row: 4;
+    }
+    .theInput:nth-of-type(7) {
+        grid-column: 6 / 7;
+        grid-row: 4;
+    }
+}
+.step3 {
+
+    .theInput:nth-of-type(1) {
+        grid-column: 1 / 11;
+        grid-row: 1;
+    }
+    .theInput:nth-of-type(2) {
+        grid-column: 1 / 6;
+        grid-row: 2;
+    }
+    .theInput:nth-of-type(3) {
+        grid-column: 6 / 11;
+        grid-row: 2;
+    }
+    .theInput:nth-of-type(4) {
+        grid-column: 1 / 6;
+        grid-row: 3;
+    }
+    .theInput:nth-of-type(5) {
+        grid-column: 6 / 11;
+        grid-row: 3;
+    }
+    .theInput:nth-of-type(6) {
+        grid-column: 1 / 6;
+        grid-row: 4;
+    }
+    .theInput:nth-of-type(7) {
+        grid-column: 6 / 11;
+        grid-row: 4;
+    }
+}

@@ -1,0 +1,101 @@
+:root {
+    // --tcolor: #19283a;
+    // --tcolor: #202e3d;
+    --tcolor: #2e3d4e;
+
+    --tcolor-1: hsl(from var(--tcolor) h s calc(l + 10));
+    --tcolor-2: hsl(from var(--tcolor) h s calc(l + 5));
+    --tcolor-3: var(--tcolor);
+    --tcolor-4: hsl(from var(--tcolor) h s calc(l - 5));
+    --tcolor-5: hsl(from var(--tcolor) h s calc(l - 10));
+}
+
+.main {
+    background: linear-gradient(135deg, var(--tcolor-3) 20%, var(--tcolor-5) 100%);
+    min-height: 100dvh; min-width: 100dvw;
+
+    color: white;
+
+    display: grid;
+    place-items: center;
+}
+
+.main .login {
+    background-color: var(--tcolor-3);
+    box-shadow: 15px 15px 20px rgba(1, 15, 31, 0.382);
+    border-radius: 15px;
+    // height: 240px; width: 780px;
+    height: 280px; width: 840px;
+
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    .loginImg {
+        height: 100%; width: 40%;
+
+        img {
+            height: 100%; width: 100%;
+            filter: contrast(1.25) grayscale(0.65);
+
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    .loginForm {
+        height: 80%; width: 60%;
+        padding: 2rem;
+    
+        display: grid;
+        gap: 1rem;
+    
+        h1 {
+            font-size: 1.75rem;
+            color: rgba(245, 245, 245, 0.836);
+            text-align: center;
+        }
+        input {
+            background-color: var(--tcolor-4);
+            outline: none;
+            border: 1px solid var(--tcolor-2);
+            border-radius: 10px;
+            padding: 12px;
+            color: rgba(245, 245, 245, 0.836);
+
+            transition: border-color 250ms ease-out;
+
+            &:focus {
+                border-color: vaR(--tcolor-1);
+            }
+        }
+        button {
+            background-color: var(--tcolor-1);
+            border: 1px solid var(--tcolor-4);
+            border-radius: 10px;
+            padding: 12px;
+    
+            cursor: pointer;
+            transition: border-color 250ms ease-out;
+
+            h3 {
+                font-size: 0.95rem;
+                font-weight: 500;
+                color: rgba(245, 245, 245, 0.719);
+    
+                transform: scale(1);
+                transition: color 250ms ease-out;
+            }
+
+            &:hover { 
+                border-color: var(--tcolor-3);
+                h3 {
+                    color: rgba(245, 245, 245, 0.839);
+                }
+            }
+        }
+        .erro {
+            color: #f87171;
+        }
+    }
+}

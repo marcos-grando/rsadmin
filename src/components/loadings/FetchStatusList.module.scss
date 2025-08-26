@@ -1,0 +1,100 @@
+@use "../../utilities/styles/variables" as *;
+
+.containerGeneral {
+    box-shadow: -1px 1px 12px var(--terciary-2);
+    border: 1px solid var(--terciary-2);
+    border-radius: 2px;
+    margin: 2rem;
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+@keyframes shadowInline {
+    0%   { left: -150%; }
+    100% { left: 150%; }
+}
+.containerLoading {
+    padding: 4px;
+    flex: 1;
+    overflow: hidden;
+
+    .eachItem {
+        height: 4rem; width: 100%;
+        padding: 1rem;
+
+        display: grid;
+        grid-template-columns: minmax(40px, 60px) minmax(180px, 1fr) minmax(50px, 70px) 70px;
+        gap: 1rem;
+
+        position: relative;
+
+        .shadow {
+            border-radius: 50px;
+            height: 100%; width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        &:not(:first-of-type) {
+
+            .shadow {
+
+                background-color: var(--primary-3);
+                &::before {
+                    content: "";
+                    background: linear-gradient( 120deg, var(--terciary-1) 0%, var(--secondary-5) 50%, var(--terciary-1) 100% );
+                    height: 100%; width: 150%;
+  
+                    position: absolute;
+                    top: 0; left: -150%;
+                    transform: skewX(-25deg);
+                    opacity: 0.15;
+
+                    pointer-events: none;  /* não atrapalha cliques */
+                    animation: shadowInline 5s ease-in-out infinite;
+                }
+            }
+            &:not(:last-of-type):after {
+                content: "";
+                background-color: var(--secondary-5);
+                height: 1px; width: 98%;
+
+                position: absolute;
+                bottom: 0; left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        &:first-of-type {
+
+            .shadow {
+                background-color: var(--primary-2);
+                &::before {
+                    content: "";
+                    background: linear-gradient( 120deg, var(--terciary-1) 0%, var(--secondary-5) 50%, var(--terciary-1) 100% );
+                    height: 100%; width: 150%;
+  
+                    position: absolute;
+                    top: 0; left: -150%;
+                    transform: skewX(-25deg);
+                    opacity: 0.15;
+
+                    pointer-events: none;  /* não atrapalha cliques */
+                    animation: shadowInline 5s ease-in-out infinite;
+                }
+            }
+            &::after {
+                content: "";
+                background-color: var(--secondary-5);
+                height: 1px; width: 98%;
+
+                position: absolute;
+                bottom: 0; left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}

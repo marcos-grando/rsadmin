@@ -1,0 +1,182 @@
+@use "../../../utilities/styles/variables" as *;
+
+$padd_container: $dashboard_padding_container;
+$radius: $dashboard_radius_areas;
+$bg: $dashboard_bg_areas;
+
+$color_grid: var(--primary-2);
+// $color_grid: rgba(43, 37, 37, 0.39);
+$color_lineMain: var(--atrative-3);
+$color_label: rgb(179, 162, 162);
+
+.container {
+    border-radius: $radius;
+    height: auto; width: 100%;
+    padding: $padd_container;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .theTitle {
+        margin-bottom: 1rem;
+
+        h2 {
+            margin-bottom: 2px;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        p {
+            font-size: 14px;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+    }
+    .content {
+        height: 100%; width: 100%;
+
+        display: flex;
+
+        .graphWrapper {
+            height: 500px; width: 100%;
+
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            grid-template-rows: 1fr 40px;
+            gap: 8px 6px;
+
+            .yLabels {
+                grid-column: 1;
+                grid-row: 1;
+
+                color: $color_label;
+                font-size: 0.75rem;
+
+                display: flex;
+                flex-direction: column;
+
+                .yLabel {
+                    height: 100% !important;
+                    display: flex;                    
+                    align-items: center;
+                }
+            }
+            .xLabels {
+                grid-column: 2;
+                grid-row: 2;
+
+                color: $color_label;
+                font-size: 0.75rem;
+                display: flex;
+                justify-content: space-between;
+
+                .xLabel {
+                    width: 0;
+                    text-align: center;
+
+                    display: flex;
+                    justify-content: center;
+                    white-space: nowrap;
+
+                    &:first-of-type {
+                        transform: translateX(10px);
+                    }
+                    &:last-of-type {
+                        transform: translateX(-12px);
+                    }
+                }
+            }
+            .contentGraphic {
+                grid-column: 2;
+                grid-row: 1;
+
+                height: 100%; width: 100%;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+    
+                .grid {
+                    position: absolute;
+                    top: 0; left: 0;
+                    height: 100%; width: 100%;
+                    pointer-events: none;
+    
+                    .horizontalLines {
+                        height: 100%; width: 100%;
+                        position: absolute;
+                        display: flex;
+                        flex-direction: column;
+
+                        .line {
+                            border-top: 1px solid $color_grid;
+                            height: 100%; width: 100%;
+                            
+                            z-index: 101;
+
+                            &:last-of-type {
+                                border-bottom: 1px solid $color_lineMain;
+                                z-index: 102;
+                            }
+                        }    
+                    }
+                    .verticalLines {
+                        height: 100%; width: 100%;
+                        display: flex;
+                        justify-content: space-between !important;
+                        position: absolute;
+                        gap: 1rem;
+
+                        .line {
+                            background-color: $color_grid;
+                            height: 100%; width: 1px;
+                            z-index: 101;
+                            position: absolute;
+        
+                            &:nth-child(1) {
+                                left: 0%;
+                                background-color: $color_lineMain;
+                                z-index: 102;
+                            }
+                            &:nth-child(2) { left: 25%; }
+                            &:nth-child(3) { left: 50%; }
+                            &:nth-child(4) { left: 75%; }
+                            &:nth-child(5) { left: 100%; }
+                        }
+                    }
+                }
+    
+                .column {
+                    height: 100%; width: 100%;
+                    margin-bottom: 1px;
+                    position: relative;
+
+                    .columnContent {
+                        background-color: var(--atrative-2);
+                        height: 55%;
+                        min-width: max-content;
+                        padding: 0 10px;
+
+                        color: var(--secondary-3);
+                        font-size: 0.8rem;
+                        font-weight: 300;
+
+                        display: flex;
+                        align-items: center;
+    
+                        position: absolute;
+                        bottom: 50%; left: 2px;
+                        transform: translateY(50%);
+    
+                        transition: background-color 250ms ease-out, transform 250ms ease-out;
+                        z-index: 102;
+                        
+                        &:hover {
+                            background-color: var(--atrative-3);
+                            transform: translateY(50%) scale(1.015);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

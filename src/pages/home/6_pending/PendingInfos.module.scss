@@ -1,0 +1,58 @@
+@use "../../../utilities/styles/variables" as *;
+
+$padd_container: $dashboard_padding_container;
+$radius: $dashboard_radius_areas;
+$bg: $dashboard_bg_areas;
+
+$color_grid: rgb(43, 37, 37);
+$color_lineMain: red;
+$color_label: rgb(179, 162, 162);
+
+.container {
+    border-radius: $radius;
+    height: auto; width: 100%;
+    min-height: 450px;
+    padding: $padd_container;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    .theTitle {
+        border-radius: 100px;
+        width: max-content;
+
+        h2 {
+            margin-bottom: 4px;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        p {
+            font-size: 14px;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+    }
+    .content {
+        box-shadow: -1px 1px 12px var(--terciary-2);
+        border: 1px solid var(--terciary-2);
+        border-radius: 2px;
+        margin: 2rem;
+    
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+
+        h2 { font-size: 3rem; }
+
+        // .infoContent {
+        //     background-color: var(--primary-2);
+        //     border-radius: 100px;
+        //     width: 100%;
+        //     padding: 1rem 2rem;
+        // }
+    }
+}

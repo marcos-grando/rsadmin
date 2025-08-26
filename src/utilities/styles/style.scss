@@ -1,0 +1,105 @@
+:root {
+
+    /* ===== Fallbacks Estáticos ===== */
+    --primary-1: #1a1b21;
+    --primary-2: #1e2027;
+    --primary-3: #23252c;
+    --primary-4: #393d49;
+    --primary-5: #444957;
+
+    --gradient-background: linear-gradient(180deg, #444957 0%, #393d49 100%);
+
+    --secondary-1: rgb(227, 229, 232);
+    --secondary-2: rgba(227, 229, 232, 0.90);
+    --secondary-3: rgba(227, 229, 232, 0.80);
+    --secondary-4: rgba(227, 229, 232, 0.70);
+    --secondary-5: rgba(227, 229, 232, 0.15);
+
+    --terciary-1: rgba(22, 27, 34, 0.180);
+    --terciary-2: rgba(22, 27, 34, 0.360);
+    --terciary-3: rgba(22, 27, 34, 0.540);
+    --terciary-4: rgba(22, 27, 34, 0.720);
+    --terciary-5: rgba(22, 27, 34, 0.9);
+
+    --atrative-1: #9c2121;
+    --atrative-2: #871c1c;
+    --atrative-3: #721818;
+    --atrative-4: #5d1414;
+    --atrative-5: #480f0f;
+
+    /* ===== Variáveis Dinâmicas ===== */
+    --primary-base: rgb(57, 61, 73);
+    --secondary-base: rgba(227, 229, 232);
+    --terciary-base: rgb(22, 27, 34);
+    // --atrative-base: rgb(114, 24, 24); 
+    // --atrative-base: rgb(40, 78, 109);
+    --atrative-base: #2e3d4e;
+
+    --primary-1: hsl(from var(--primary-base) h s calc(l - 14));
+    --primary-2: hsl(from var(--primary-base) h s calc(l - 12));
+    --primary-3: hsl(from var(--primary-base) h s calc(l - 10));
+    --primary-4: var(--primary-base);
+    --primary-5: hsl(from var(--primary-base) h s calc(l + 5));
+
+    --gradient-background: linear-gradient(180deg, var(--primary-5) 0%, var(--primary-4) 100%);
+
+    --secondary-1: hsl(from var(--secondary-base) h s l / 1);
+    --secondary-2: hsl(from var(--secondary-base) h s l / 0.90);
+    --secondary-3: hsl(from var(--secondary-base) h s l / 0.80);
+    --secondary-4: hsl(from var(--secondary-base) h s l / 0.70);
+    --secondary-5: hsl(from var(--secondary-base) h s l / 0.15);
+
+    --terciary-1: hsl(from var(--terciary-base) h s l / 0.180);
+    --terciary-2: hsl(from var(--terciary-base) h s l / 0.360);
+    --terciary-3: hsl(from var(--terciary-base) h s l / 0.540);
+    --terciary-4: hsl(from var(--terciary-base) h s l / 0.720);
+    --terciary-5: hsl(from var(--terciary-base) h s l / 0.900);
+
+    --atrative-1: hsl(from var(--atrative-base) h s calc(l + 10));
+    --atrative-2: hsl(from var(--atrative-base) h s calc(l + 5));
+    --atrative-3: var(--atrative-base);
+    --atrative-4: hsl(from var(--atrative-base) h s calc(l - 5));
+    --atrative-5: hsl(from var(--atrative-base) h s calc(l - 10));
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+
+    isolation: auto !important;
+    unicode-bidi: normal !important;
+}
+
+html,
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color-scheme: light dark;
+    line-height: 1.25;
+    width: 100%;
+}
+
+html {
+    background-color: #161B22;
+}
+
+body {
+    background-color: #161B22;
+    height: 100%;
+}
+
+#root {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}

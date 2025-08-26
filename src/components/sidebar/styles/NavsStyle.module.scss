@@ -1,0 +1,103 @@
+@use '../../../utilities/styles/variables' as *;
+
+$timeAll: 350ms;
+
+$itemBgHover: var(--atrative-4);
+$itemBgActive: var(--atrative-3);
+
+$itemColor: var(--secondary-3);
+$itemColorHover: var(--secondary-2);
+$itemColorActive: var(--secondary-1);
+
+$itemRightLine: var(--atrative-5);
+$gapNavLines: var(--atrative-2);
+
+nav {
+    width: 100%;
+
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    ul {
+        width: 100%;
+        padding: 1rem 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    &.init::after,
+    &.config::before {
+        content: "";
+        background-color: $gapNavLines;
+        border-radius: 10px;
+        height: 3px; width: 90%;
+
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &.init::after   { bottom: 0; }
+    &.config::before { top:    0; }
+}
+
+nav ul .item {
+    width: 100%;
+    font-size: 0.95rem;
+
+    transition:
+        transform $timeAll ease-out,
+        background-color $timeAll ease-out,
+        color $timeAll ease-out
+    ;
+    position: relative;
+
+    a {
+        height: 100%; width: 100%;
+        padding: 12px 2rem;
+        color: $itemColor;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+
+        position: relative;
+        transition: color $timeAll ease-out;
+
+        span {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &.active {
+        background-color: $itemBgActive;
+
+        &::after {
+            content: "";
+
+            background-color: $itemRightLine;
+            height: 100%; width: 8px;
+
+            position: absolute;
+            top: 0; right: 0;
+        }
+        a {
+            color: $itemColorActive;    
+            transition: color $timeAll ease-out;
+        }
+    }
+    &:hover {
+        background-color: $itemBgHover;
+
+        a {
+            color: $itemColorHover;
+        }
+    }
+
+}

@@ -1,0 +1,58 @@
+@use "../../../../utilities/styles/variables" as *;
+
+$padd_container: $dashboard_padding_container;
+$border-color: var(--terciary-5);
+$radius: $dashboard_radius_areas;
+$bg: $dashboard_bg_areas;
+
+.kpisContainer {
+    height: 100%; width: 100%;
+    padding: 1rem 0;
+
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    
+    &:not(:hover) {
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            opacity: 0;
+        }
+    }
+}
+
+.divShadowExternal {
+    box-shadow: inset 18px 0 6px -14px $border-color, inset -18px 0 6px -14px $border-color;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-radius: 5px;
+    height: calc(100% - 16px); width: 100%;
+
+    position: absolute;
+    top: 0; left: 0;
+
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 101;
+    transition: border 250ms ease-out;
+
+    &.divStart {
+        box-shadow: inset -18px 0 6px -14px $border-color;
+        border-right: 1px solid $border-color;
+    }
+    &.divEnd {
+        box-shadow: inset 18px 0 6px -14px $border-color;
+        border-left: 1px solid $border-color;
+    }
+    &.divBoth {
+        border-left: 1px solid $border-color;
+        border-right: 1px solid $border-color;
+    }
+    &.divNotBoth {
+        box-shadow: none;
+    }
+}

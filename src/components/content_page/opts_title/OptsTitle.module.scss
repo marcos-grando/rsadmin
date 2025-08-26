@@ -1,0 +1,41 @@
+@use "../../../utilities/styles/variables" as *;
+
+.theTitle {
+    background-color: var(--primary-1);
+    width: 100%;
+    max-width: $max_container;
+    padding: 0 1.5rem;
+    // margin: 1.25rem auto;
+    margin: 0 auto;
+
+    display: flex;
+    gap: 2rem;
+    position: relative;
+
+    &::after {
+        content: "";
+        height: 1px; width: 100%;
+        // background-color: var(--secondary-5);
+        background-color: var(--terciary-1);
+        position: absolute;
+        bottom: 0; left: 0;
+        z-index: 100;
+    }
+
+    .opt {
+        border-bottom: 2px solid transparent;
+        height: auto; width: max-content;
+        padding: 1rem;
+        font-size: 1.15rem;
+
+        color: var(--secondary-4);
+
+        z-index: 101;
+        cursor: pointer;
+        transition: border-bottom 350ms ease-out, color 250ms ease-out;
+
+
+        &:hover { color: var(--secondary-3); border-color: var(--atrative-5); }
+        &.focus { color: var(--secondary-1); border-color: var(--atrative-4); }
+    }
+}

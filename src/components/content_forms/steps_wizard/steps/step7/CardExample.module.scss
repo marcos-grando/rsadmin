@@ -1,0 +1,114 @@
+@use "../../../../../utilities/styles/variables" as *;
+
+.exampleItem {
+    border: 1px solid rgba(32, 4, 4, 0.61);
+    border-radius: 15px;
+
+    min-height: 230px !important;
+    height: auto; width: auto;
+    max-height: 270px;
+    aspect-ratio: 1 / 1.25 !important;
+
+    text-align: center;
+    font-size: 16px;
+
+    position: relative;
+    cursor: pointer;
+}
+.exampleItem img {
+    border-radius: 15px;
+    height: 100%; width: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: all 250ms ease-out;
+}
+.exampleItem .item {
+    /* border: 1px solid red; */
+    border-radius: 15px;
+    height: 100%; width: 100%;
+
+    position: absolute;
+    top: 0;
+}
+.exampleItem .item .status {
+    background-color: rgb(100, 26, 26);
+    height: auto; width: 100%;
+    padding: 4px 0;
+
+    color: rgb(235, 225, 225);
+    text-align: center;
+
+    transform: translateY(50%);
+    transition: all 250ms ease-out;
+}
+
+.exampleItem .item .content {
+    border: 1px groove rgb(0, 4, 24);
+    border-radius: 11px;
+    background-color: whitesmoke;
+    height: auto; width: 100%;
+    padding: 0.5em;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translate(50%, 50%) scale(1.075);
+    transition: all 250ms ease-out;
+}
+
+.exampleItem .item .content .texts {
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.3rem;
+    color: rgb(3, 20, 43);
+    font-weight: 400;
+}
+.exampleItem .item .content .texts p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.exampleItem .item .content .texts p.title {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.exampleItem .item .content .texts p.local {
+    font-size: 0.9em;
+}
+.exampleItem .item .content .texts p.valor {
+    font-size: 0.9em;
+}
+.exampleItem .item .content .texts p.valor span {
+    color: rgb(20, 1, 1);
+    font-weight: 400;
+}
+
+.exampleItem .item .content .infos {
+    border-top: 1px solid rgba(20, 2, 2, 0.288);
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0.4rem;
+}
+.exampleItem .item .content .infos .info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.15rem;
+
+    color: rgb(29, 2, 2);
+    font-size: 0.95em;
+}
+.exampleItem .item .content .infos .info svg {
+    color: rgb(7, 69, 119);
+    height: 1.25rem;
+}

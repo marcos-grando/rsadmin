@@ -1,0 +1,58 @@
+// :root { // alguns descartes de cores e variações 
+//     --test1: #000000;
+//     --test2: #171B2A;
+//     --test3: #1D2033;
+//     --test4: #303447;
+//     --test5: #56545B;
+//     --test6: #9E9C9E;
+//     --test7: #D9D0D6;
+//     --test8: #FFFFFF;
+
+//     --test2-1: #161A20;
+//     --test2-2: #242930;
+//     --test2-3: #FFFFFF;
+//     --test2-4: #C7CFDB;
+//     --test2-5: #0d1015;
+
+//     // ==[ primary original base ]==
+//     --primary-1: #1D1D24;
+//     --primary-2: #1E1E2E;
+//     --primary-3: #27293d;
+//     --primary-4: #353e53;
+//     --primary-5: #2c3241;
+
+//     // ==[ primary mais voltado ao azul ]==
+//     --primary-base: #353e53;
+//     --primary-1: hsl(from var(--primary-base) h s calc(l - 14));
+//     --primary-2: hsl(from var(--primary-base) h s calc(l - 12));
+//     --primary-3: hsl(from var(--primary-base) h s calc(l - 10));
+//     --primary-4: hsl(from var(--primary-base) h s calc(l - 5));
+//     --primary-5: hsl(from var(--primary-base) h s calc(l - 0));
+
+//     --cor1: rgb(37, 163, 85);
+//     --cor2: rgb(34, 153, 80);
+//     --cor3: #04B9FF;
+//     --cor4: #04B9FF;
+//     --cor5: #5FFFB2;
+// }
+
+$components_border: var(--terciary-5);
+$list_border: var(--terciary-5);
+
+$sidebar_bg: var(--primary-1); // var(--primary-2) #161B22
+$header_bg: var(--primary-1); // var(--primary-1)
+
+// $dashboardApp_bg: linear-gradient(180deg, #1E1E2E, #1D1D24);
+// $dashboardApp_bg: linear-gradient(180deg, #27293d, #272738);
+// $dashboardApp_bg: linear-gradient(  180deg,  #242832 0%,  #282C34 100%); // #1F2126
+// $dashboardApp_bg: linear-gradient(  180deg,  #262A34 0%,  #24262c 100%);
+$dashboardApp_bg: var(--gradient-background); //#232b3d
+$divs_infos_bg: var(--primary-1);
+
+$max_container: 1480px; // 1280px;
+$grid_columns: 40px 1fr 180px 180px 70px 70px;
+
+$header_height: 70px; // tbm usa no container button open/close sidebar;
+$dashboard_bg_areas: var(--atrative-5);
+$dashboard_padding_container: 1.5rem 2rem;
+$dashboard_radius_areas: 12px;

@@ -1,0 +1,65 @@
+@use "../../../../utilities/styles/variables" as *;
+
+.infosTitle {
+    height: auto; width: 100%;
+    padding: 1rem 10px;
+
+    display: grid;
+    align-items: center;
+
+    position: relative;
+    
+    &::after {
+        content: "";
+        background-color: var(--secondary-5);
+        height: 1px; width: 98%;
+
+        position: absolute;
+        bottom: 0; left: 50%;
+        transform: translateX(-50%);
+    }
+    div {
+        padding-left: 2px;
+    }
+    .uniq {
+        height: 100%; width: 100%;
+        padding-left: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-2px);
+    }
+    h3 {
+        font-size: 0.9rem;
+        font-weight: 400;
+        opacity: 0.9;
+
+        white-space: nowrap;
+        
+        button {
+            outline: none;
+            background-color: var(--terciary-2);
+            border: 1px solid transparent;
+            border-radius: 100px;
+            padding: 8px 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+
+            color: var(--secondary-4);
+            transition: background-color 250ms ease-out, color 350ms ease-out;
+            cursor: pointer;
+
+            &:hover, &.focus {
+                background-color: var(--terciary-4);
+                color: var(--secondary-2);
+            }
+            &.focus {
+                border: 1px solid var(--secondary-5);
+            }
+        }
+    }
+}

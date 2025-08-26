@@ -1,0 +1,137 @@
+@use "../../utilities/styles/variables" as *;
+
+$not: rgb(160, 52, 38);
+$yes: rgb(34, 81, 95);
+$colorh2: var(--secondary-1);
+$colorTexts: var(--secondary-4);
+$colorAlert: var(--secondary-3);
+$colorButtons: var(--secondary-2);
+
+
+@keyframes loadingRotate {
+    0%   { transform: translate(-50%, -50%) rotate(0deg);   }
+    60%  { transform: translate(-50%, -50%) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.modalConfirm {
+    border: none;
+    background-color: var(--terciary-3);
+    height: 100%; width: 100%;
+    padding: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    left: 0; top: 0;
+
+    opacity: 0;
+    overflow: hidden;
+    
+    z-index: 10001;
+    transition: opacity 350ms ease-out;
+
+    &:focus { border: none; }
+    &.openConfirm { opacity: 1; }
+    &.closeConfirm { opacity: 0; }
+
+    .content {
+        background-color: var(--primary-2);
+        box-shadow: -12px 12px 22px var(--terciary-4);
+        border: 1px solid var(--secondary-5);
+        border-radius: 15px;
+        height: max-content; width: max-content;
+        padding: 2rem 3.5rem;
+
+        text-align: start;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: $colorh2;
+        }
+        .theText {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            p {
+                font-size: 1rem;
+                font-weight: 400;
+                color: $colorTexts;
+            }
+        }
+        .theAlert {
+            font-weight: 500;
+            color: $colorAlert;
+        }
+        .buttons {
+            width: 100%;
+            padding-top: 0.15rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.75rem;
+
+            button {
+                border: 2px solid transparent;
+                border-radius: 30px;
+                padding: 0.65rem 1.25rem;
+
+                color: $colorButtons;
+                font-size: 1rem;
+                font-weight: 600;
+
+                transition: background-color 250ms ease-out, color 250ms ease-out, filter 250ms ease-out;
+                cursor: pointer;
+
+                p {
+                    display: inline-block;
+                    transform: scale(1.025);
+                    transition: transform 350ms ease-out;
+                }
+                &.buttonTrue {
+                    background-color: $not;
+                    border-color: $not;
+                    position: relative;
+
+                    &:hover {
+                        color: var(--secondary-1);
+                        background-color: $not;
+                        filter: brightness(0.9);
+
+                        p { transform: scale(1); }
+                    }
+                    &.loadingTrue {
+                        color: var(--secondary-5);
+
+                        svg {
+                            color: var(--secondary-3);
+                            position: absolute;
+                            top: 50%; left: 50%;
+                            transform: translate(-50%, -50%);
+    
+                            animation: loadingRotate 950ms linear infinite;
+                        }
+                    }
+                }
+                &.buttonFalse {
+                    background: none;
+                    border-color: $yes;
+
+                    &:hover {
+                        color: var(--secondary-1);
+                        background-color: $yes;
+                        
+                        p { transform: scale(1); }
+                    }
+                }
+            }
+        }
+    }
+}

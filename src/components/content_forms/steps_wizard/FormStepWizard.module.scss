@@ -1,0 +1,218 @@
+@use "../../../utilities/styles/variables" as *;
+
+.container {
+    width: 100%;
+    min-height: 0; min-width: 0;
+    flex: 1;
+
+    color: var(--secondary-2);
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    overflow-y: hidden;
+
+    .content {
+        min-height: 0; width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        .contentTitle {
+            background-color: var(--terciary-1);
+            padding: 2rem 2rem 0.75rem 2rem;
+            position: relative;
+
+            &::before {
+                content: "";
+                background-color: var(--primary-4);
+                border-radius: 10px;
+                height: 1px; width: 96%;
+
+                position: absolute;
+                left: 50%; bottom: 0;
+                transform: translateX(-50%);
+            }
+
+            h2 {
+                padding-left: 0.5rem;
+
+                font-size: 1.1rem;
+                font-weight: 400;
+            }
+        }
+        .spaceNav {
+            background-color: var(--primary-1);
+            box-shadow: 0 -1px 1px var(--terciary-2);
+            border-top: 1px solid var(--primary-3);
+            height: 4rem; width: 100%;
+            padding: 0.5rem 1rem;
+            position: relative;
+    
+            button {
+                padding: 0.5rem 0.75rem;
+                position: absolute;
+    
+                &:not(.buttonBack) {
+                    right: 2rem; top: 50%;
+                    transform: translateY(-50%);
+                }
+                &.buttonBack {
+                    left: 2rem; top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+    }
+    .spaceTitle {
+        background-color: var(--primary-1);
+        width: 100%;
+        min-height: 0; min-width: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        // overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        .spaceSteps {
+            width: 100%;
+            min-height: 0; min-width: 0;
+
+            display: flex;
+            flex-direction: row;
+
+            .stepInfo {
+                background: none;
+                border: 1px solid var(--primary-3);
+                border-bottom: 2px solid transparent;
+                min-height: 0; min-width: 0;
+                padding: 1rem 12px;
+
+                flex: 0 1 calc(100% / 7);
+                display: flex;
+                flex-direction: column-reverse;
+                justify-content: center;
+                align-items: center;
+                gap: 7px;
+
+                position: relative;
+                transition: background 350ms ease-out, border 350ms ease-out;
+                &:not(.stepIn):not(.ignoreStatus) {
+                    cursor: pointer;
+
+                    &:hover {
+                        
+                        h2 {
+                            scale: 1.05;
+                        }
+                    }
+                }
+
+                svg {
+                    background-color: var(--primary-1);
+                    border-radius: 50%;
+                    padding: 2px;
+
+                    position: absolute;
+                    bottom: 0;
+                    transform: translateY(60%);
+                    z-index: 101;
+                }
+                h2 {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+
+                    font-size: 1rem;
+                    font-weight: 400;
+
+                    transition: scale 250ms ease-out;
+                }
+
+                &.ignoreStatus {
+                    background: linear-gradient(360deg, rgba(168, 168, 168, 0.185) 0%, transparent 50%);
+                }
+                &.warningStatus {
+                    background: linear-gradient(360deg, rgba(247, 0, 0, 0.185) 0%, transparent 50%);
+                }
+                &.obsStatus {
+                    background: linear-gradient(360deg, rgba(247, 161, 0, 0.185) 0%, transparent 50%);
+                }
+                &.sucessoStatus {
+                    background: linear-gradient(360deg, rgba(58, 247, 0, 0.185) 0%, transparent 50%);
+                }
+                &.stepIn {
+                    background: linear-gradient(360deg, var(--primary-3) 0%, transparent 70%);
+                }
+
+                &.warningStatus.stepIn {    border-bottom-color: rgb(97, 5, 5); }
+                &.obsStatus.stepIn {        border-bottom-color: rgb(104, 70, 8); }
+                &.sucessoStatus.stepIn {    border-bottom-color: rgb(3, 70, 3); }
+
+                &.ignoreStatus svg {    color: gray; }
+                &.warningStatus svg {   color: red; }
+                &.obsStatus svg {       color: orange; }
+                &.sucessoStatus svg {   color: green; }
+
+                &.stepOut:not(.ignoreStatus) h2 {   color: var(--secondary-3); }
+                &.ignoreStatus h2 {                 color: var(--secondary-5); }
+                &.stepIn h2 {                       color: var(--secondary-2); }
+
+                // &.stepIn {
+                //     border-bottom-color: rgb(119, 128, 6);
+                // }
+            }
+        }
+    }
+    .spaceNav {
+        height: 4rem;
+        padding: 0.5rem 1rem;
+        position: relative;
+
+        button {
+            background-color: var(--secondary-5);
+            border: 1px solid var(--terciary-5);
+            border-radius: 50px;
+            padding: 0.65rem 1.25rem !important;
+
+            color: var(--secondary-4);
+
+            cursor: pointer;
+            overflow: hidden;
+            position: absolute;
+            transition: color 150ms ease-out;
+            
+            &::after {
+                content: "";
+                height: 100%; width: 100%;
+                background-color: transparent;
+                position: absolute;
+                top: 0; left: 0;
+                transition: background-color 150ms ease-out;
+            }
+            &.disablede {
+                pointer-events: none;
+                opacity: 0.6;
+            }
+            &:hover {
+                color: var(--secondary-1);
+
+                &::after {
+                    background-color: var(--terciary-1);
+                }
+            }
+            &:not(.buttonBack) {
+                right: 2rem; top: 50%;
+                transform: translateY(-50%);
+            }
+            &.buttonBack {
+                left: 2rem; top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

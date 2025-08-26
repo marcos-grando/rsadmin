@@ -1,0 +1,53 @@
+@use "../../utilities/styles/variables" as *;
+
+.header {
+    background-color: $header_bg;
+    box-shadow: 0 4px 8px var(--terciary-3);
+    border-bottom: 1px solid $components_border;
+    height: $header_height; width: 100%;
+    min-height: $header_height;
+    padding: 1rem;
+    
+    position: relative;
+
+    h2 {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .quit {
+        background-color: var(--primary-3);
+        border: 1px solid var(--terciary-5);
+        
+        height: 2.5rem; aspect-ratio: 1/1;
+        border-radius: 50%;
+        margin-right: 2rem;
+        padding: 5px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+        position: absolute;
+        top: 50%; right: 0;
+        transform: translateY(-50%);
+
+        transition: border-color 250ms ease-out;
+
+        svg {
+            transform: scale(0.85);
+            color: var(--secondary-4);
+            transition: transform 250ms ease-out, color 350ms ease-out;
+        }
+
+        &:hover {
+            border-color: transparent;
+
+            svg {
+                transform: scale(0.9);
+                color: var(--secondary-1);
+            }
+        }
+    }
+}

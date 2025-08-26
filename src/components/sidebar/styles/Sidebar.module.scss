@@ -1,0 +1,142 @@
+@use '../../../utilities/styles/variables' as *;
+
+@keyframes showModal {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+.modalNoclick {
+    background-color: rgba(6, 15, 27, 0.295);
+    height: 100vh; width: 100vw;
+
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 100;
+
+    animation: showModal 250ms ease-out 1 forwards;
+}
+
+
+@keyframes theTitleOpen {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+@keyframes theTitleClosed {
+    from { transform: translateY(0); }
+    to { transform: translate(-50%, -80%); opacity: 0; }
+}
+@keyframes menuIconAnimate {
+    from { scale: 0; }
+    to { scale: 1; }
+}
+@keyframes xIconAnimate {
+    from { scale: 0; }
+    to { scale: 1; }
+}
+
+.sidebar {
+    background-color: $sidebar_bg;
+    box-shadow: 0 0 10px var(--terciary-4);
+    border-right: 1px solid $components_border;
+    height: 100vh; width: 250px;
+    height: 100dvh;
+    padding-top: $header_height;
+
+    display: grid;
+    grid-template-rows: max-content auto max-content;
+    flex-shrink: 0;
+
+    z-index: 1001;
+    position: relative;
+    align-self: flex-start;
+
+    &.desktop {
+        transition: width 350ms ease-out, padding 350ms ease-in;
+        
+        &.closed {
+            width: 0;
+            padding: 0;
+        }
+        &.open {
+            width: 250px;
+        }
+        .sidebarContent li {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+    &.mobile {        
+        transition: transform 350ms ease-out;
+        transform: translateX(-100%);
+        width: 250px;
+
+        position: fixed;
+        top: 0; left: 0;
+
+        &.open {
+            transform: translateX(0);
+        }
+    }
+
+    .theTitle {
+        height: $header_height; width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: 0; left: 0;
+        pointer-events: none;
+
+        &.open { animation: theTitleOpen 350ms ease-in 1 forwards; }
+        &.closed { animation: theTitleClosed 350ms ease-in-out 1 forwards; }
+
+        h1 {
+            margin-bottom: -4px;
+
+            transform: scale(1.4);
+            z-index: 100;
+        }
+        p {
+            margin-top: -4px;
+            text-shadow: 0px -3px 4px black;
+
+            transform: scale(1.4);
+            z-index: 101;
+        }
+    }
+
+    .buttonContainer {
+        height: $header_height;
+
+        display: flex;
+        align-items: center;
+
+        position: absolute;
+        top: 0; right: 0;
+        transform: translateX(100%);
+        z-index: 10000000001 !important;
+
+        .closOpenIcons {
+            background-color: var(--primary-2);
+            box-shadow: -1px 1px 3px var(--primary-3);
+            border-radius: 50%;
+            padding: 5px;
+
+            transform: translateX(100%);
+            cursor: pointer;
+
+            &.menuIcon {
+                animation: menuIconAnimate 350ms ease-out 1 forwards;
+            }
+            &.xIcon {
+                animation: xIconAnimate 350ms ease-out 1 forwards;
+            }
+        }
+    }
+}

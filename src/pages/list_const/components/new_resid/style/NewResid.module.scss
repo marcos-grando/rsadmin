@@ -1,0 +1,96 @@
+@use "../../../../../utilities/styles/variables" as *;
+
+@keyframes upWindow {
+    from {
+        bottom: -30%;
+    } to {
+        bottom: 20%;
+    }
+}
+@keyframes downWindow {
+    from {
+        bottom: 20%;
+    } to {
+        bottom: -30%;
+    }
+}
+.nowItem {
+    min-height: 0; min-width: 0;
+    // padding: 2rem; // desativar
+
+    flex: 1;
+    
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .isResultWindow {
+        background-color: var(--primary-1);
+        border: 2px solid;
+        border-radius: 15px;
+        padding: 1.75rem 2.5rem;
+
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        animation: upWindow 450ms ease-out 1 forwards;
+
+        &.closeWindow { animation: downWindow 450ms ease-out 1 forwards; }
+        svg {
+            color: var(--secondary-4);
+            position: absolute;
+            top: 0.5rem; right: 0.5rem;
+            cursor: pointer;
+            transition: scale 250ms ease-out, color 250ms ease-out;
+
+            &:hover {
+                scale: .95;
+                color: var(--secondary-2);
+            }
+        }
+        h2 { font-size: 1.5rem; }
+        p { font-size: 1rem; }
+    }
+
+    .wrapper {
+        // background-color: var(--terciary-3); // desativar
+        // box-shadow: -4px 2px 12px var(--terciary-2); // desativar
+        // border: 1px solid $list_border; // desativar
+        
+        min-height: 0; min-width: 0;
+        width: 100%; max-width: $max_container;
+        margin: 0 auto;
+
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+
+        .bossTitle {
+            background-color: var(--primary-1);
+            border-bottom: 1px solid $list_border;
+            width: 100%; max-width: $max_container;
+            padding: 12px 1rem;
+
+            color: var(--secondary-2);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h2 {
+                font-size: 1.15rem;
+                font-weight: 500;
+            }
+        }
+    }
+}
