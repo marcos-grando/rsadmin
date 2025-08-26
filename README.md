@@ -145,9 +145,3 @@ Servidor Express que fornece rotas locais para desenvolvimento:
 
 - A estrutura tá pronta para escalar com novas rotas e páginas react;
 - Em produção (Vercel), cada função na pasta `/api/` deve ser isolada (compatível ao ambiente serverless).
-
----
-
-## ✍️ Licença
-
-Este projeto está licenciado sob a Licença MIT.
