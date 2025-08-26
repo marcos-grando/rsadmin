@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import supabase from "../../utilities/util/supabaseClient";
 import styles from "./Home.module.scss";
 // processData
 import processkpis from "./scripts/processKpis";
