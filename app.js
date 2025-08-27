@@ -35,23 +35,6 @@ app.get('/health', (_req, res) => {
     res.set('Cache-Control', 'no-store');
     res.json({ ok: true, ts: Date.now() });
 });
-
-app.use(helmet());
-app.use(express.json({ limit: '5mb' }));
-app.use(cookieParser());
-
-const allowed = process.env.CORS_ORIGIN?.split(',') ?? ['http://localhost:5173', 'https://SEUAPP.vercel.app'];
-const corsCfg = {
-    origin: (o, cb) => (!o || allowed.includes(o)) ? cb(null, true) : cb(new Error('CORS')),
-    credentials: true
-};
-app.use(cors(corsCfg));
-app.options('*', cors(corsCfg));
-
-// app.use(cors({
-//     origin: (origin, cb) => (!origin || allowed.includes(origin)) ? cb(null, true) : cb(new Error('CORS blocked')),
-//     credentials: true
-// }));
 app.get('/_diag/auth', (_req, res) => {
     res.json({
         hasHash: !!process.env.ADMIN_PASSWORD_HASH,
@@ -59,6 +42,35 @@ app.get('/_diag/auth', (_req, res) => {
         hasRefresh: !!process.env.JWT_REFRESH_SECRET
     });
 });
+
+app.use(helmet());
+app.use(express.json({ limit: '5mb' }));
+app.use(cookieParser());
+
+
+
+const rawAllowed = process.env.CORS_ORIGIN?.split(',').map(s => s.trim()).filter(Boolean) ?? ['http://localhost:5173', 'https://rsadmin-phi.vercel.app'];
+function matchOrigin(origin, list) {
+    return list.some(p => {
+        if (p === '*') return true;
+        if (p.startsWith('*.')) return origin.endsWith(p.slice(1)); // ex: *.vercel.app
+        return origin === p;
+    });
+}
+
+const corsCfg = {
+    origin: (origin, cb) => {
+        if (!origin) return cb(null, true); // curl, navegação direta
+        cb(null, matchOrigin(origin, rawAllowed));
+    },
+    credentials: true
+};
+
+app.use(cors(corsCfg));
+app.options('*', cors(corsCfg));
+
+
+
 
 // ===-{ configs Multer/apis+files }-===
 const upload = multer({ storage: multer.memoryStorage() });
