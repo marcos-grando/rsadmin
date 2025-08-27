@@ -5,7 +5,6 @@ import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-
 import requireAuth from './server/util/authRequire.js';
 
 // auth apis
