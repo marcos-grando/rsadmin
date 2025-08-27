@@ -9,5 +9,5 @@ export default function requireAuth(req, res, next) {
         next();
     } catch {
         res.status(401).json({ error: 'Sessão expirada' });
-    }
-}
+    };
+};

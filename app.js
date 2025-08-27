@@ -41,10 +41,17 @@ app.use(express.json({ limit: '5mb' }));
 app.use(cookieParser());
 
 const allowed = process.env.CORS_ORIGIN?.split(',') ?? ['http://localhost:5173', 'https://SEUAPP.vercel.app'];
-app.use(cors({
-    origin: (origin, cb) => (!origin || allowed.includes(origin)) ? cb(null, true) : cb(new Error('CORS blocked')),
+const corsCfg = {
+    origin: (o, cb) => (!o || allowed.includes(o)) ? cb(null, true) : cb(new Error('CORS')),
     credentials: true
-}));
+};
+app.use(cors(corsCfg));
+app.options('*', cors(corsCfg));
+
+// app.use(cors({
+//     origin: (origin, cb) => (!origin || allowed.includes(origin)) ? cb(null, true) : cb(new Error('CORS blocked')),
+//     credentials: true
+// }));
 
 
 // ===-{ configs Multer/apis+files }-===
@@ -83,6 +90,9 @@ app.patch('/update-resid/:id', requireAuth, upload.fields(fields_uploads.apis_re
 app.post('/create-resid', requireAuth, upload.fields(fields_uploads.apis_resid), createResid);
 app.get('/read-resid/:id', requireAuth, readResid);
 
-
+app.use((err, _req, res, _next) => {
+    console.error('UNHANDLED', err);
+    res.status(500).json({ error: 'internal_error' });
+});
 
 export default app;
