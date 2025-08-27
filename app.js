@@ -75,7 +75,7 @@ app.patch('/update-resid/:id', requireAuth, upload.fields(fields_uploads.apis_re
 app.post('/create-resid', requireAuth, upload.fields(fields_uploads.apis_resid), createResid);
 app.get('/read-resid/:id', requireAuth, readResid);
 
-// check público (entender melhor isso depois)
+
 app.get('/health', (_req, res) => res.json({ ok: true }));
 
 export default app;
