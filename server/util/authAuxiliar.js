@@ -1,16 +1,22 @@
 import jwt from 'jsonwebtoken';
 
+const ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
+const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
+
 export const cookieOpts = {
     httpOnly: true,
-    sameSite: 'strict',
-    secure: process.env.NODE_ENV === 'production',
-    path: '/'
+    secure: true,
+    sameSite: 'none',
+    path: '/',
+    ...(process.env.COOKIE_DOMAIN ? { domain: process.env.COOKIE_DOMAIN } : {})
 };
 
 export function issueAccessToken(sub) {
-    return jwt.sign({ sub, typ: 'access' }, process.env.JWT_ACCESS_SECRET, { expiresIn: '2h' });
+    if (!ACCESS_SECRET) throw new Error('JWT_ACCESS_SECRET ausente');
+    return jwt.sign({ sub }, ACCESS_SECRET, { expiresIn: '2h' });
 };
 
 export function issueRefreshToken(sub) {
-    return jwt.sign({ sub, typ: 'refresh' }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
+    if (!REFRESH_SECRET) throw new Error('JWT_REFRESH_SECRET ausente');
+    return jwt.sign({ sub }, REFRESH_SECRET, { expiresIn: '7d' });
 };

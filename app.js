@@ -52,7 +52,13 @@ app.options('*', cors(corsCfg));
 //     origin: (origin, cb) => (!origin || allowed.includes(origin)) ? cb(null, true) : cb(new Error('CORS blocked')),
 //     credentials: true
 // }));
-
+app.get('/_diag/auth', (_req, res) => {
+    res.json({
+        hasHash: !!process.env.ADMIN_PASSWORD_HASH,
+        hasAccess: !!process.env.JWT_ACCESS_SECRET,
+        hasRefresh: !!process.env.JWT_REFRESH_SECRET
+    });
+});
 
 // ===-{ configs Multer/apis+files }-===
 const upload = multer({ storage: multer.memoryStorage() });
