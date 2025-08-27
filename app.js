@@ -30,14 +30,22 @@ import deleteResid from './server/supabase/crud_resid/deleteResid.js';
 
 const app = express();
 
+// app.get('/health', (_req, res) => res.json({ ok: true }));
+app.get('/health', (_req, res) => {
+    res.set('Cache-Control', 'no-store');
+    res.json({ ok: true, ts: Date.now() });
+});
+
 app.use(helmet());
 app.use(express.json({ limit: '5mb' }));
 app.use(cookieParser());
 
+const allowed = process.env.CORS_ORIGIN?.split(',') ?? ['http://localhost:5173', 'https://SEUAPP.vercel.app'];
 app.use(cors({
-    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:5173'],
+    origin: (origin, cb) => (!origin || allowed.includes(origin)) ? cb(null, true) : cb(new Error('CORS blocked')),
     credentials: true
 }));
+
 
 // ===-{ configs Multer/apis+files }-===
 const upload = multer({ storage: multer.memoryStorage() });
@@ -76,6 +84,5 @@ app.post('/create-resid', requireAuth, upload.fields(fields_uploads.apis_resid),
 app.get('/read-resid/:id', requireAuth, readResid);
 
 
-app.get('/health', (_req, res) => res.json({ ok: true }));
 
 export default app;
