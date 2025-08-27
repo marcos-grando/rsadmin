@@ -1,4 +1,5 @@
-import { issueAccessToken, issueRefreshToken } from "../util/authAuxiliar.js";
+import { cookieOpts, issueAccessToken, issueRefreshToken } from "../util/authAuxiliar.js";
+import jwt from 'jsonwebtoken';
 
 export default async function Refresh(req, res) {
     const { rt } = req.cookies || {};
