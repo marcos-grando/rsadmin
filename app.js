@@ -6,27 +6,27 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 
-import requireAuth from './api/util/authRequire.js';
+import requireAuth from './server/util/authRequire.js';
 
 // auth apis
-import Login from './api/auth/login.js';
-import Logout from './api/auth/logout.js';
-import Refresh from './api/auth/refresh.js';
+import Login from './server/auth/login.js';
+import Logout from './server/auth/logout.js';
+import Refresh from './server/auth/refresh.js';
 
 // apis
-import readList from './api/supabase/readList.js';
-import listSelectOpts from './api/supabase/readOpts.js';
-import readTypeList from './api/supabase/readTypeList.js';
+import readList from './server/supabase/readList.js';
+import listSelectOpts from './server/supabase/readOpts.js';
+import readTypeList from './server/supabase/readTypeList.js';
 
-import createConst from './api/supabase/crud_const/createConst.js';
-import readConst from './api/supabase/crud_const/readConst.js';
-import updateConst from './api/supabase/crud_const/updateConst.js';
-import deteleConst from './api/supabase/crud_const/deteleConst.js';
+import createConst from './server/supabase/crud_const/createConst.js';
+import readConst from './server/supabase/crud_const/readConst.js';
+import updateConst from './server/supabase/crud_const/updateConst.js';
+import deteleConst from './server/supabase/crud_const/deteleConst.js';
 
-import createResid from './api/supabase/crud_resid/createResid.js';
-import readResid from './api/supabase/crud_resid/readResid.js';
-import updateResid from './api/supabase/crud_resid/updateResid.js';
-import deleteResid from './api/supabase/crud_resid/deleteResid.js';
+import createResid from './server/supabase/crud_resid/createResid.js';
+import readResid from './server/supabase/crud_resid/readResid.js';
+import updateResid from './server/supabase/crud_resid/updateResid.js';
+import deleteResid from './server/supabase/crud_resid/deleteResid.js';
 
 
 const app = express();
