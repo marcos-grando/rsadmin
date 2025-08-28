@@ -108,16 +108,8 @@ Servidor Express que fornece rotas locais para desenvolvimento:
 - `@supabase/supabase-js` para integração com Supabase.
 - Ignorado em produção.
 
-### vite.config.js
-- Define proxy para `/api` → `http://localhost:3000`.
-- Configura o plugin React para Vite.
-
-### supabaseClient.js
-- Cliente do Supabase usado no frontend.
-- Usa variáveis `VITE_` (visíveis ao browser).
-
 ### supabaseClient.server.js
-- Cliente do Supabase usado no backend.
+- Cliente do Supabase usado pelas apis.
 - Usa variáveis privadas com `process.env`.
 
 ### package.json
