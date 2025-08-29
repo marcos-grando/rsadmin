@@ -23,10 +23,6 @@ import fetchSelectTable from './api/supabase/readList.js';
 import listSelectOpts from './api/supabase/readOpts.js';
 import readTypeList from './api/supabase/readTypeList.js';
 
-import deteleConst from './api/supabase/crud_const/deteleConst.js';
-
-import deleteResid from './api/supabase/crud_resid/deleteResid.js';
-
 import readItem from './api/supabase/crud/readItem.js';
 import createItem from './api/supabase/crud/createItem.js';
 import updateItem from './api/supabase/crud/updateItem.js';
