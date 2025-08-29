@@ -33,13 +33,6 @@ function FormStepWizard({ formData, alterProps, setFormData, handleSubmit, the_t
             });
         };
     }, [alterProps]);
-    
-    useEffect(() => {
-        setTimeout(() => {
-            const consoletext = alterProps ? "Alter Resid: " : "New Resid: ";
-            console.log(consoletext, formData);
-        }, 1000);
-    }, [formData]);
 
     const isNav = (s) => { if (status?.[s] !== "ignore") setTheStep(s); };
     const back = () => setTheStep((prev) => Math.max(prev - 1, 1));
