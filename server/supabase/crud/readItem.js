@@ -12,7 +12,7 @@ export default async function readItem(req, res) {
     const select = FETCH_COLUMNS[key];
     if (!select) return res.status(400).json({ error: 'Recurso inválido' });
 
-    const { table } = select;
+    const { table, columns } = select;
     if (!table) return res.status(400).json({ error: 'Tabela Inválida' });
     if (!Array.isArray(columns) || columns.length === 0) {
         return res.status(400).json({ error: 'Nenhuma coluna válida' });
