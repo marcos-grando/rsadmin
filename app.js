@@ -70,9 +70,9 @@ app.use(cors({
 // };
 
 // ===-{apis Auth - apenas login próprio}-===
-app.post('/api/auth/login', login);
-app.post('/api/auth/refresh', refresh);
-app.post('/api/auth/logout', logout);
+// app.post('/api/auth/login', login);
+// app.post('/api/auth/refresh', refresh);
+// app.post('/api/auth/logout', logout);
 
 // // === { listas } ===
 // app.get('/api/read-list', requireAuth, fetchSelectTable);
