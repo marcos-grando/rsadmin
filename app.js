@@ -11,22 +11,22 @@ import {
     KEY_SELECT_CONST, KEY_SELECT_RESID,
     KEY_UPDATE_CONST, KEY_UPDATE_RESID
 } from './shared/theMasterKeys.js';
-import requireAuth from './api/auth/authRequire.js';
+import requireAuth from './server/auth/authRequire.js';
 
 // auth
-import login from './api/auth/login.js';
-import logout from './api/auth/logout.js';
-import refresh from './api/auth/refresh.js';
+import login from './server/auth/login.js';
+import logout from './server/auth/logout.js';
+import refresh from './server/auth/refresh.js';
 
 // crudizin
-import fetchSelectTable from './api/supabase/readList.js';
-import listSelectOpts from './api/supabase/readOpts.js';
-import readTypeList from './api/supabase/readTypeList.js';
+import fetchSelectTable from './server/supabase/readList.js';
+import listSelectOpts from './server/supabase/readOpts.js';
+import readTypeList from './server/supabase/readTypeList.js';
 
-import readItem from './api/supabase/crud/readItem.js';
-import createItem from './api/supabase/crud/createItem.js';
-import updateItem from './api/supabase/crud/updateItem.js';
-import deleteItem from './api/supabase/crud/deleteItem.js';
+import readItem from './server/supabase/crud/readItem.js';
+import createItem from './server/supabase/crud/createItem.js';
+import updateItem from './server/supabase/crud/updateItem.js';
+import deleteItem from './server/supabase/crud/deleteItem.js';
 
 const app = express();
 

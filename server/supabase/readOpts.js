@@ -1,4 +1,4 @@
-import supabase from '../../server/clients/supabaseClient.server.js';
+import supabase from '../../helpers/clients/supabaseClient.server.js';
 
 export default async function listSelectOpts(req, res) {
     try {

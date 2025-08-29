@@ -1,6 +1,6 @@
-import supabase from "../../../server/clients/supabaseClient.server.js";
-import { extratReqBody, organizedFields } from "../../../server/util/crud_auxiliar/createAndUpdateAuxiliar.js";
-import { FETCH_COLUMNS } from "../../../server/util/tablesAndColumns.js";
+import supabase from "../../../helpers/clients/supabaseClient.server.js";
+import { extratReqBody, organizedFields } from "../../../helpers/util/crud_auxiliar/createAndUpdateAuxiliar.js";
+import { FETCH_COLUMNS } from "../../../helpers/util/tablesAndColumns.js";
 
 export default async function createItem(req, res) {
     const { key } = req.query;

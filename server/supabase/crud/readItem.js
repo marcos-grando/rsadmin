@@ -1,6 +1,6 @@
-import supabase from "../../../server/clients/supabaseClient.server.js";
-import { readAuxiliar } from "../../../server/util/crud_auxiliar/readItemAuxiliar.js";
-import { FETCH_COLUMNS } from "../../../server/util/tablesAndColumns.js";
+import supabase from "../../../helpers/clients/supabaseClient.server.js";
+import { readAuxiliar } from "../../../helpers/util/crud_auxiliar/readItemAuxiliar.js";
+import { FETCH_COLUMNS } from "../../../helpers/util/tablesAndColumns.js";
 
 export default async function readItem(req, res) {
     const { key } = req.query;

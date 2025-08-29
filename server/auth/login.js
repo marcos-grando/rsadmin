@@ -1,4 +1,4 @@
-import { cookieOpts, issueAccessToken, issueRefreshToken } from "../../server/util/authAuxiliar.js";
+import { cookieOpts, issueAccessToken, issueRefreshToken } from "../../helpers/util/authAuxiliar.js";
 import bcrypt from 'bcryptjs';
 
 export default async function Login(req, res) {
