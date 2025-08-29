@@ -14,9 +14,9 @@ import cookieParser from 'cookie-parser';
 // import requireAuth from './server/auth/authRequire.js';
 
 // auth
-import login from './server/auth/login.js';
-import logout from './server/auth/logout.js';
-import refresh from './server/auth/refresh.js';
+// import login from './server/auth/login.js';
+// import logout from './server/auth/logout.js';
+// import refresh from './server/auth/refresh.js';
 
 // crudizin
 // import fetchSelectTable from './server/supabase/readList.js';
