@@ -11,7 +11,7 @@ import {
     KEY_SELECT_CONST, KEY_SELECT_RESID,
     KEY_UPDATE_CONST, KEY_UPDATE_RESID
 } from './shared/theMasterKeys.js';
-import requireAuth from './api/util/authRequire.js';
+import requireAuth from './api/auth/authRequire.js';
 
 // auth
 import login from './api/auth/login.js';

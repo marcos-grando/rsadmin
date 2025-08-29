@@ -1,4 +1,4 @@
-import { cookieOpts } from "../util/authAuxiliar.js";
+import { cookieOpts } from "../../server/util/authAuxiliar.js";
 
 export default async function Logout(req, res) {
     res.clearCookie('sid', { ...cookieOpts })

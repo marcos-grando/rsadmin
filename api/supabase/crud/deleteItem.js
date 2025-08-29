@@ -1,5 +1,5 @@
-import supabase from "../../clients/supabaseClient.server.js";
-import { FETCH_COLUMNS } from "../../util/tablesAndColumns.js";
+import supabase from "../../../server/clients/supabaseClient.server.js";
+import { FETCH_COLUMNS } from "../../../server/util/tablesAndColumns.js";
 
 export default async function deleteItem(req, res) {
     const { key } = req.query;
