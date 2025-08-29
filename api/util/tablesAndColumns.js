@@ -1,4 +1,7 @@
 // MANTER SINCRONIZADO COM "src/utilities/util/theMasterKeys.js";
+
+import { KEY_CREATE_CONST, KEY_CREATE_RESID, KEY_DELETE_CONST, KEY_DELETE_RESID, KEY_SELECT_CONST, KEY_SELECT_RESID, KEY_UPDATE_CONST, KEY_UPDATE_RESID } from "../../shared/theMasterKeys.js";
+
 // 'crud' precisa estar sincronizado com formData's respectivos;
 export const FETCH_COLUMNS = {
     // Infos do Dashboard
@@ -20,21 +23,35 @@ export const FETCH_COLUMNS = {
         columns: ['*']
     },
 
-    // dados de imóvel único
-    select_resid: {
+
+    
+    [KEY_DELETE_RESID]: {
+        table: 'items'
+    },
+    [KEY_CREATE_RESID]: {
+        table: 'items'
+    },
+    [KEY_SELECT_RESID]: {
         table: 'items',
         columns: ['*', 'tipo:types (id, name)', 'construtora:construtoras (id, name)']
     },
-    update_resid: {
+    [KEY_UPDATE_RESID]: {
         table: 'items',
         columns: ['type_id', 'name', 'construtora_id', 'valor', 'logo', 'local', 'longitude', 'latitude', 'cep', 'rua', 'bairro', 'cidade', 'estado', 'extradb', 'status_id', 'thumb']
     },
 
-    select_const: {
+
+    [KEY_DELETE_CONST]: {
+        table: 'construtoras'
+    },
+    [KEY_CREATE_CONST]: {
+        table: 'construtoras'
+    },
+    [KEY_SELECT_CONST]: {
         table: 'construtoras',
         columns: ['id', 'name', 'logo', 'items_count']
     },
-    update_const: {
+    [KEY_UPDATE_CONST]: {
         table: 'construtoras',
         columns: ['id', 'name', 'slug', 'logo']
     },

@@ -1,13 +1,18 @@
 
-// ==> MANTER SINCRONIZADO COM "api/util/tablesAndColumns.js"; <==
+// ==> MANTER SINCRONIZADO COM 
+// "api/util/tablesAndColumns.js"; <==
+// "api/util/...ItemAuxiliar.js"; <==
+
 
 // Talvez sincronizar com "src/utilities/util/fieldTitleLists.js";
 export const KEYS_LIST = {
     KEY_GERAL: 'geral_types',
     KEY_HOME: 'home_infos',
+
     KEY_ALL_ITEMS: 'all_items',
     KEY_ALL_CONST: 'all_consts',
     KEY_WITH_TYPES: 'geral_types',
+
     KEY_SELECT_CONST: 'select_const',
     KEY_UPDATE_CONST: 'update_const',
     KEY_SELECT_RESID: 'select_resid',

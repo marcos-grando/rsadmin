@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import style from "./AlterResidContainer.module.scss";
-import { useUpdateResid } from "../../../../utilities/hooks/crud_resid/useUpdateResid";
+import { useUpdateResid } from "../../../../utilities/hooks/useCrudBase";
 import { buildFormData } from "../../../../utilities/util/buildFormData";
 import { FORM_SUBMIT } from "../../../../utilities/util/fieldTitleForms";
-import { KEYS_LIST } from "../../../../utilities/util/theMasterKeys";
 import FormStepWizard from "../../../../components/content_forms/steps_wizard/FormStepWizard";
 import AlterResidMsgFinale from "./AlterResidMsgFinale";
 import LoadingCircle from "../../../../components/loadings/LoadingCircle";
@@ -23,7 +22,7 @@ function AlterResidContainer({ formData, setFormData, resetForms, handleResetInf
         try {
             setNameForMsg(formData?.name);
 
-            await updateResid(idResidSelect, fd, KEYS_LIST?.KEY_UPDATE_RESID);
+            await updateResid(idResidSelect, fd);
             setSucess(true);
 
             setTimeout(() => {

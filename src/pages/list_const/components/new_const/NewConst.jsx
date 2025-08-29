@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./style/NewConst.module.scss";
-import { useCreateConst } from "../../../../utilities/hooks/crud_const/useCreateConst";
+import { useCreateConst } from "../../../../utilities/hooks/useCrudBase";
 import { FORM_CONST_FORMDATA, FORM_SUBMIT } from "../../../../utilities/util/fieldTitleForms";
 import { buildFormData } from "../../../../utilities/util/buildFormData";
 import FormStepUnique from "../../../../components/content_forms/step_unique/FormStepUnique";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./style/NewResid.module.scss";
-import { useCreateResid } from "../../../../utilities/hooks/crud_resid/useCreateResid";
+import { useCreateResid } from "../../../../utilities/hooks/useCrudBase";
 import { FORM_RESID_FORMDATA, FORM_SUBMIT } from "../../../../utilities/util/fieldTitleForms";
 import { buildFormData } from "../../../../utilities/util/buildFormData";
 import FormStepWizard from "../../../../components/content_forms/steps_wizard/FormStepWizard";

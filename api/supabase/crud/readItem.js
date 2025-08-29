@@ -1,17 +1,18 @@
 import supabase from "../../clients/supabaseClient.server.js";
+import { readAuxiliar } from "../../util/crud_auxiliar/readItemAuxiliar.js";
 import { FETCH_COLUMNS } from "../../util/tablesAndColumns.js";
 
-export default async function readResid(req, res) {
+export default async function readItem(req, res) {
     const { key } = req.query;
     const { id } = req.params;
 
-    if (!id) return res.status(400).json({ error: 'ID não informado' })
+    if (!key) return res.status(400).json({ error: 'Key inválida' });
+    if (!id) return res.status(400).json({ error: 'ID não informado' });
 
     const select = FETCH_COLUMNS[key];
     if (!select) return res.status(400).json({ error: 'Recurso inválido' });
 
-    const { table, columns } = select;
-
+    const { table } = select;
     if (!table) return res.status(400).json({ error: 'Tabela Inválida' });
     if (!Array.isArray(columns) || columns.length === 0) {
         return res.status(400).json({ error: 'Nenhuma coluna válida' });
@@ -23,24 +24,12 @@ export default async function readResid(req, res) {
         if (error) throw error;
         if (!data) return res.status(404).json({ error: "Registro não encontrado" });
 
-        const extradb = data.extradb || {};
-        const payload = {
-            ...data,
-            aptoimg: Array.isArray(extradb.aptoimg) ? extradb.aptoimg : [],
-            condimg: Array.isArray(extradb.condimg) ? extradb.condimg : [],
-            plantimg: Array.isArray(extradb.plantimg) ? extradb.plantimg : [],
-            extradb: {
-                ...extradb,
-                aptoimg: [],
-                condimg: [],
-                plantimg: [],
-            },
-        };
+        const payload = readAuxiliar(data, key);
 
         return res.status(200).json({ data: payload });
 
     } catch (err) {
-        console.error('readResid error: ', err);
+        console.error(`${key} error: `, err);
         return res.status(500).json({ error: err.message });
     };
 };

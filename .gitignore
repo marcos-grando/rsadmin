@@ -18,6 +18,7 @@ coverage
 .eslintcache
 *.local
 
+trash/
 public/infos/
 .vscode/*
 !.vscode/extensions.json

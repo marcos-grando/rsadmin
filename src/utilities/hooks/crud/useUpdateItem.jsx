@@ -1,40 +1,32 @@
 import { useState } from "react";
 import { useConfirm } from "../../contexts/ContextConfirm";
-import { fetchWithRefresh } from '../fetchWithRefresh';
+import { fetchWithRefresh } from "../fetchWithRefresh";
 import { callRefreshFetch } from "../../util/theRefreshFetchBus";
-import { KEYS_LIST } from "../../util/theMasterKeys";
+import { msgFinale } from "./msgsFinalize";
 
-export function useUpdateConst() {
-
+export function useUpdateItem(key, keyForBus) {
     const [result, setResult] = useState({ error: null, loading: null });
     const { showConfirm, confirmDone, confirmSetError } = useConfirm();
 
-    const updateConst = async (id, formData, key) => {
+    const updateItem = async (id, formData) => {
 
-        const isUpdate = await showConfirm({
-            title: "Fazer as Alterações?",
-            text: [`Os dados serão alterados permanentemente.`],
-            alert: "Essa ação NÃO poderá ser desfeita.",
-            not: "Não, cancelar",
-            yes: "Fazer Alterações",
-        });
+        const isUpdate = await showConfirm(msgFinale);
         if (!isUpdate) return;
 
         setResult(prev => ({ ...prev, loading: true, error: null }));
 
         try {
-            // const res = await fetch(`/api/update-const/${id}?key=${key}`, { method: 'PATCH', body: formData });
-            const res = await fetchWithRefresh(`/api/update-const/${id}?key=${key}`, {
+            const res = await fetchWithRefresh(`/api/update-item/${id}?key=${key}`, {
                 method: 'PATCH',
                 credentials: 'include',
                 headers: { 'X-Requested-With': 'XMLHttpRequest' },
-                body: formData
+                body: formData,
             });
 
             const json = await res.json();
             if (!res.ok) throw new Error(json.error || 'Erro genérico');
 
-            callRefreshFetch(KEYS_LIST?.KEY_ALL_CONST); // BUS entre hooks
+            if (keyForBus) callRefreshFetch(keyForBus); // BUS entre hooks
 
             confirmDone(); // context confirm
             setResult(prev => ({ ...prev, loading: false, error: null }));
@@ -44,11 +36,8 @@ export function useUpdateConst() {
             confirmSetError(err.message); // context confirm
             setResult(prev => ({ ...prev, error: err?.message || 'Erro desconhecido', loading: false }));
             return null;
-
-        } finally {
-            confirmDone();
         };
     };
 
-    return { ...result, updateConst };
+    return { ...result, updateItem };
 };

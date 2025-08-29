@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { CONST_CONSTRUTORAS, CONST_RESIDENCIAIS, VIEW_MODE } from "../../utilities/util/fieldTitleLists";
-import { useDeleteConst } from "../../utilities/hooks/crud_const/useDeleteConst";
-import { useDeleteResid } from "../../utilities/hooks/crud_resid/useDeleteResid";
+import { useDeleteConst } from "../../utilities/hooks/useCrudBase";
+import { useDeleteResid } from "../../utilities/hooks/useCrudBase";
 import ListContainer from "../../components/content_page/list_container/ListContainer";
 import FetchStatusList from "../../components/loadings/FetchStatusList";
 

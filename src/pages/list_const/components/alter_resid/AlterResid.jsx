@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useReadResid } from "../../../../utilities/hooks/crud_resid/useReadResid";
-import { KEYS_LIST } from "../../../../utilities/util/theMasterKeys";
+import { useReadResid } from "../../../../utilities/hooks/useCrudBase";
 import { FORM_RESID_FORMDATA } from "../../../../utilities/util/fieldTitleForms";
 import { getValueByPath, setValueByPath } from "../../../../utilities/util/processValueByPath";
 import AlterResidContainer from "./AlterResidContainer";
 
 function AlterResid({ idResidSelect, handleViewMode }) {
 
-    const { data: data_read, error: error_read, loading: loading_read } = useReadResid(idResidSelect, KEYS_LIST?.KEY_SELECT_RESID);
+    const { data: data_read, error: error_read, loading: loading_read } = useReadResid(idResidSelect);
 
     const [formData, setFormData] = useState(() => structuredClone(FORM_RESID_FORMDATA));
     const [startData, setStartData] = useState(() => structuredClone(FORM_RESID_FORMDATA));

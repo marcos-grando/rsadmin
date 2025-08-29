@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getValueByPath, setValueByPath } from "../../../../utilities/util/processValueByPath";
-import { useReadConst } from "../../../../utilities/hooks/crud_const/useReadConst";
+import { useReadConst } from "../../../../utilities/hooks/useCrudBase";
 import { FORM_CONST_FORMDATA } from "../../../../utilities/util/fieldTitleForms";
-import { KEYS_LIST } from "../../../../utilities/util/theMasterKeys";
 import AlterConstContainer from "./AlterConstContainer";
 
 function AlterConst({ idConstSelect, handleViewMode }) {
 
-    const { data: data_read, error: error_read, loading: loading_read } = useReadConst(idConstSelect, KEYS_LIST?.KEY_SELECT_CONST);
+    const { data: data_read, error: error_read, loading: loading_read } = useReadConst(idConstSelect);
 
     const [formData, setFormData] = useState(() => structuredClone(FORM_CONST_FORMDATA));
     const [startData, setStartData] = useState(() => structuredClone(FORM_CONST_FORMDATA));

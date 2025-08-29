@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import style from "./style/AlterConst.module.scss";
-import { useUpdateConst } from "../../../../utilities/hooks/crud_const/useUpdateConst";
+import { useUpdateConst } from "../../../../utilities/hooks/useCrudBase";
 import { buildFormData } from "../../../../utilities/util/buildFormData";
 import { FORM_SUBMIT } from "../../../../utilities/util/fieldTitleForms";
-import { KEYS_LIST } from "../../../../utilities/util/theMasterKeys";
 import FormStepUnique from "../../../../components/content_forms/step_unique/FormStepUnique";
 import AlterConstMsgFinale from "./AlterConstMsgFinale";
 import LoadingCircle from "../../../../components/loadings/LoadingCircle";
@@ -32,7 +31,7 @@ function AlterConstContainer({ formData, setFormData, resetForms, handleResetInf
         try {
             setNameForMsg(formData?.name);
 
-            await updateConst(idConstSelect, fd, KEYS_LIST?.KEY_UPDATE_CONST);
+            await updateConst(idConstSelect, fd);
             setSucess(true);
 
             setTimeout(() => {

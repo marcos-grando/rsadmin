@@ -5,77 +5,47 @@ import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import requireAuth from './server/util/authRequire.js';
+import {
+    KEY_CREATE_CONST, KEY_CREATE_RESID,
+    KEY_DELETE_CONST, KEY_DELETE_RESID,
+    KEY_SELECT_CONST, KEY_SELECT_RESID,
+    KEY_UPDATE_CONST, KEY_UPDATE_RESID
+} from './shared/theMasterKeys.js';
+import requireAuth from './api/util/authRequire.js';
 
-// auth apis
-import Login from './server/auth/login.js';
-import Logout from './server/auth/logout.js';
-import Refresh from './server/auth/refresh.js';
+// auth
+import login from './api/auth/login.js';
+import logout from './api/auth/logout.js';
+import refresh from './api/auth/refresh.js';
 
-// apis
-import readList from './server/supabase/readList.js';
-import listSelectOpts from './server/supabase/readOpts.js';
-import readTypeList from './server/supabase/readTypeList.js';
+// crudizin
+import fetchSelectTable from './api/supabase/readList.js';
+import listSelectOpts from './api/supabase/readOpts.js';
+import readTypeList from './api/supabase/readTypeList.js';
 
-import createConst from './server/supabase/crud_const/createConst.js';
-import readConst from './server/supabase/crud_const/readConst.js';
-import updateConst from './server/supabase/crud_const/updateConst.js';
-import deteleConst from './server/supabase/crud_const/deteleConst.js';
+import deteleConst from './api/supabase/crud_const/deteleConst.js';
 
-import createResid from './server/supabase/crud_resid/createResid.js';
-import readResid from './server/supabase/crud_resid/readResid.js';
-import updateResid from './server/supabase/crud_resid/updateResid.js';
-import deleteResid from './server/supabase/crud_resid/deleteResid.js';
+import deleteResid from './api/supabase/crud_resid/deleteResid.js';
 
+import readItem from './api/supabase/crud/readItem.js';
+import createItem from './api/supabase/crud/createItem.js';
+import updateItem from './api/supabase/crud/updateItem.js';
+import deleteItem from './api/supabase/crud/deleteItem.js';
 
 const app = express();
-
-// app.get('/health', (_req, res) => res.json({ ok: true }));
-app.get('/health', (_req, res) => {
-    res.set('Cache-Control', 'no-store');
-    res.json({ ok: true, ts: Date.now() });
-});
-app.get('/_diag/auth', (_req, res) => {
-    res.json({
-        hasHash: !!process.env.ADMIN_PASSWORD_HASH,
-        hasAccess: !!process.env.JWT_ACCESS_SECRET,
-        hasRefresh: !!process.env.JWT_REFRESH_SECRET
-    });
-});
 
 app.use(helmet());
 app.use(express.json({ limit: '5mb' }));
 app.use(cookieParser());
 
-
-
-const rawAllowed = process.env.CORS_ORIGIN?.split(',').map(s => s.trim()).filter(Boolean) ?? ['http://localhost:5173', 'https://rsadmin-phi.vercel.app'];
-function matchOrigin(origin, list) {
-    return list.some(p => {
-        if (p === '*') return true;
-        if (p.startsWith('*.')) return origin.endsWith(p.slice(1)); // ex: *.vercel.app
-        return origin === p;
-    });
-}
-
-const corsCfg = {
-    origin: (origin, cb) => {
-        if (!origin) return cb(null, true); // curl, navegação direta
-        cb(null, matchOrigin(origin, rawAllowed));
-    },
+app.use(cors({
+    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:5173', 'https://rsadmin-phi.vercel.app'],
     credentials: true
-};
-
-app.use(cors(corsCfg));
-app.options('*', cors(corsCfg));
-
-
-
+}));
 
 // ===-{ configs Multer/apis+files }-===
 const upload = multer({ storage: multer.memoryStorage() });
-
-const fields_uploads = {
+const fields = {
     apis_resid: [
         { name: 'logo', maxCount: 1 },
         { name: 'thumb', maxCount: 1 },
@@ -85,32 +55,47 @@ const fields_uploads = {
     ],
     apis_const: [{ name: 'logo', maxCount: 1 }]
 };
+const fields_uploads = {
+    [KEY_SELECT_CONST]: fields?.apis_const,
+    [KEY_UPDATE_CONST]: fields?.apis_const,
+    [KEY_DELETE_CONST]: fields?.apis_const,
+    [KEY_CREATE_CONST]: fields?.apis_const,
+
+    [KEY_SELECT_RESID]: fields?.apis_resid,
+    [KEY_UPDATE_RESID]: fields?.apis_resid,
+    [KEY_DELETE_RESID]: fields?.apis_resid,
+    [KEY_CREATE_RESID]: fields?.apis_resid,
+};
+const pickUpload = (req, res, next) => {
+    const key = req.query.key || req.params.key;
+    const spec = fields_uploads[key];
+    if (!spec) return res.status(400).json({ error: 'Key inválida' });
+    return upload.fields(spec)(req, res, next);
+};
 
 // ===-{apis Auth - apenas login próprio}-===
-app.post('/auth/login', Login);
-app.post('/auth/refresh', Refresh);
-app.post('/auth/logout', Logout);
+app.post('/auth/login', login);
+app.post('/auth/refresh', refresh);
+app.post('/auth/logout', logout);
 
 // === { listas } ===
-app.get('/read-list', requireAuth, readList);
+app.get('/read-list', requireAuth, fetchSelectTable);
 app.get('/read-opts', requireAuth, listSelectOpts);
 app.get('/read-type-list/:id', requireAuth, readTypeList);
 
+// === { crud } ===
+app.delete('/delete-item/:id', requireAuth, deleteItem)
+app.patch('/update-item/:id', requireAuth, pickUpload, updateItem);
+app.post('/create-item', requireAuth, pickUpload, createItem);
+app.get('/read-item/:id', requireAuth, readItem);
+
 // === { construtoras } ===
 app.delete('/delete-const/:id', requireAuth, deteleConst);
-app.patch('/update-const/:id', requireAuth, upload.fields(fields_uploads.apis_const), updateConst);
-app.post('/create-const', requireAuth, upload.fields(fields_uploads.apis_const), createConst);
-app.get('/read-const/:id', requireAuth, readConst);
 
 // === { residenciais } ===
 app.delete('/delete-resid/:id', requireAuth, deleteResid);
-app.patch('/update-resid/:id', requireAuth, upload.fields(fields_uploads.apis_resid), updateResid);
-app.post('/create-resid', requireAuth, upload.fields(fields_uploads.apis_resid), createResid);
-app.get('/read-resid/:id', requireAuth, readResid);
 
-app.use((err, _req, res, _next) => {
-    console.error('UNHANDLED', err);
-    res.status(500).json({ error: 'internal_error' });
-});
+// check público (entender melhor isso depois)
+app.get('/health', (_req, res) => res.json({ ok: true }));
 
 export default app;

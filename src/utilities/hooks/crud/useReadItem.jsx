@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fetchWithRefresh } from "../fetchWithRefresh";
 
-export function useReadResid(id, key) {
+export function useReadItem(id, key) {
     const [result, setResult] = useState({ data: {}, error: null, loading: true });
     const mountedRef = useRef(true);
 
@@ -10,10 +10,9 @@ export function useReadResid(id, key) {
         return () => { mountedRef.current = false; };
     }, []);
 
-    const fetchResid = useCallback(async () => {
+    const fetchItem = useCallback(async () => {
         try {
-            // const res =         await fetch(`/api/read-resid/${id}?key=${key}`, { cache: 'no-store' });
-            const res = await fetchWithRefresh(`/api/read-resid/${id}?key=${key}`, {
+            const res = await fetchWithRefresh(`/api/read-item/${id}?key=${key}`, {
                 method: 'GET',
                 cache: 'no-store'
             });
@@ -29,7 +28,7 @@ export function useReadResid(id, key) {
         };
     }, [id, key]);
 
-    useEffect(() => { fetchResid().catch(() => { }); }, [fetchResid]);
+    useEffect(() => { fetchItem().catch(() => { }); }, [fetchItem]);
 
     return { ...result };
 };
