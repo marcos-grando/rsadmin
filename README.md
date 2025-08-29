@@ -7,34 +7,53 @@ Sistema criado utilizando React, Vite, Node.js (Express), com banco de dados Sup
 Na execução do projeto é instanciado dois servidores: um backend utilizando Express (Node.js) e um frontend com React (Vite).
 
 - Express (Node.js):
-  - Servidor estrutrado para lidar diretamente com as rotas da API (`server.js`);
+  - Servidor estrutrado para lidar diretamente com as rotas da API (`app.js`);
   - Integra com banco de dados Supabase (`supbaseClient.server.js`);
   - Lida com arquivos via Multer;
-  - Exclusivo para ambiente local.
-
-- Vite (React):
-  - Servidor configurado para redirecionar as API's (`/api`) para o servidor Express local;
-  - Lida diretamente com o browser e interação com usuários.
-
-Em produção (Vercel) a estrutura se adapta ao 'ambiente serverless da Vercel', sendo cada rota da API transformada em uma função isolada a partir da pasta (`/api`), tornando desnecessário o uso do servidor Express.
 
 ---
 
 ## 📁 Estrutura do Projeto
 
 ```
-├── api/                                   # Todas APIs declaradas
-├── api/clients/supabaseClient.server.js   # Cliente Supabase (backend)
-├── src/                                   # Toda estrutura frontend
-├── src/utilities/supabaseClient.js        # Cliente Supabase (frontend)
-├── server.js                              # Servidor Express (desenvolvimento local)
-├── .env                                   # Variáveis de ambiente
-├── vite.config.js                         # Configuração Vite
-├── package.json                           # Scripts e dependências
+├── api/                                   # centraliza as apis (Vercel)
+│   └── index.js                           # repassa para app.js (app, { basePath: '/api' })
+├── server/                                # todas as apis reais
+│   ├── auth/                              # apis de autênticação
+│   ├── supabase/                          # apis de crud
+├── helpers/                               # funções auxiliares/helpers
+│   ├── clients/                           # instanciamento do servidor cloudinary/supabase
+│   ├── cloudinary/                        # upload/delete de imagens
+│   └── util/                              # funções úteis no geral
+├── src/                                   # frontend (React + Vite)
+├── app.js                                 # todas rotas declaradas (sem prefixo /api)
+└── .env.example                           # Como deve ficar .env
 ```
 
 ---
 
+## 🌐 Variáveis de Ambiente (.env)
+
+| Variável              | Uso                       |
+| --------------------- | ------------------------- |
+| NODE_ENV              | Ambiente (dev/prod)       |
+| PORT                  | Porta local (dev)         |
+| CORS_ORIGIN           | CORS do front             |
+| ADMIN_PASSWORD_HASH   | Senha admin (bcrypt hash) |
+| JWT_ACCESS_SECRET     | JWT access                |
+| JWT_REFRESH_SECRET    | JWT refresh               |
+| SUPABASE_URL          | Supabase URL              |
+| SUPABASE_KEY          | Supabase Key              |
+| CLOUDINARY_CLOUD_NAME | Cloudinary Name           |
+| CLOUDINARY_API_KEY    | Cloudinary Key            |
+| CLOUDINARY_API_SECRET | Cloudinary secret         |
+| VITE_MAPBOX_TOKEN     | Mapbox (frontend)         |
+
+- Usar `dotenv` para carregar no backend.
+- As variáveis são acessadas pelo React via `import.meta.env`.
+- Usar .env.example como modelo.
+
+---
 ## ⚙️ Execução do Projeto
 
 ### Desenvolvimento local
@@ -70,55 +89,6 @@ Execução simultânea devido (`package.json`) com 'concurrently':
 }
 ```
 
-### Produção (Vercel)
-
-- A pasta `/api/` é usada pela Vercel para criar funções serverless.
-- O arquivo `server.js` é ignorado no deploy.
-
----
-
-## 🌐 Variáveis de Ambiente (.env)
-
-| Variável              | Uso                       |
-| --------------------- | ------------------------- |
-| NODE_ENV              | Ambiente (dev/prod)       |
-| PORT                  | Porta local (dev)         |
-| CORS_ORIGIN           | CORS do front             |
-| ADMIN_PASSWORD_HASH   | Senha admin (bcrypt hash) |
-| JWT_ACCESS_SECRET     | JWT access                |
-| JWT_REFRESH_SECRET    | JWT refresh               |
-| SUPABASE_URL          | Supabase URL              |
-| SUPABASE_KEY          | Supabase Key              |
-| CLOUDINARY_CLOUD_NAME | Cloudinary Name           |
-| CLOUDINARY_API_KEY    | Cloudinary Key            |
-| CLOUDINARY_API_SECRET | Cloudinary secret         |
-| VITE_MAPBOX_TOKEN     | Mapbox (frontend)         |
-
-- Usar `dotenv` para carregar no backend.
-- As variáveis são acessadas pelo React via `import.meta.env`.
-
----
-
-## 🧩 Principais Arquivos
-
-### server.js
-Servidor Express que fornece rotas locais para desenvolvimento:
-- Usa `express` para rotas HTTP.
-- `multer` para upload de arquivos em memória.
-- `@supabase/supabase-js` para integração com Supabase.
-- Ignorado em produção.
-
-### supabaseClient.server.js
-- Cliente do Supabase usado pelas apis.
-- Usa variáveis privadas com `process.env`.
-
-### package.json
-- Scripts principais:
-  - `dev`: roda client e server juntos.
-  - `dev:server`: inicia Express.
-  - `dev:client`: inicia Vite.
-- Usa `concurrently`, `dotenv`, `supabase-js`, entre outros.
-
 ---
 
 ## ✅ Tecnologias e Bibliotecas
@@ -135,5 +105,5 @@ Servidor Express que fornece rotas locais para desenvolvimento:
 
 ## 📌 Observações
 
-- A estrutura tá pronta para escalar com novas rotas e páginas react;
-- Em produção (Vercel), cada função na pasta `/api/` deve ser isolada (compatível ao ambiente serverless).
+- Esse é um projeto piloto e está em desenvolvimento.
+- Maior parte do projeto foi desenvolvido utilizando ferramentas novas para mim (exceto o Frontend puro).
