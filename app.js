@@ -70,22 +70,22 @@ const pickUpload = (req, res, next) => {
 };
 
 // ===-{apis Auth - apenas login próprio}-===
-app.post('/auth/login', login);
-app.post('/auth/refresh', refresh);
-app.post('/auth/logout', logout);
+app.post('/api/auth/login', login);
+app.post('/api/auth/refresh', refresh);
+app.post('/api/auth/logout', logout);
 
 // === { listas } ===
-app.get('/read-list', requireAuth, fetchSelectTable);
-app.get('/read-opts', requireAuth, listSelectOpts);
-app.get('/read-type-list/:id', requireAuth, readTypeList);
+app.get('/api/read-list', requireAuth, fetchSelectTable);
+app.get('/api/read-opts', requireAuth, listSelectOpts);
+app.get('/api/read-type-list/:id', requireAuth, readTypeList);
 
 // === { crud } ===
-app.delete('/delete-item/:id', requireAuth, deleteItem)
-app.patch('/update-item/:id', requireAuth, pickUpload, updateItem);
-app.post('/create-item', requireAuth, pickUpload, createItem);
-app.get('/read-item/:id', requireAuth, readItem);
+app.delete('/api/delete-item/:id', requireAuth, deleteItem)
+app.patch('/api/update-item/:id', requireAuth, pickUpload, updateItem);
+app.post('/api/create-item', requireAuth, pickUpload, createItem);
+app.get('/api/read-item/:id', requireAuth, readItem);
 
 // check público (entender melhor isso depois)
-app.get('/health', (_req, res) => res.json({ ok: true }));
+app.get('/api/health', (_req, res) => res.json({ ok: true }));
 
 export default app;
