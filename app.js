@@ -89,12 +89,6 @@ app.patch('/update-item/:id', requireAuth, pickUpload, updateItem);
 app.post('/create-item', requireAuth, pickUpload, createItem);
 app.get('/read-item/:id', requireAuth, readItem);
 
-// === { construtoras } ===
-app.delete('/delete-const/:id', requireAuth, deteleConst);
-
-// === { residenciais } ===
-app.delete('/delete-resid/:id', requireAuth, deleteResid);
-
 // check público (entender melhor isso depois)
 app.get('/health', (_req, res) => res.json({ ok: true }));
 
