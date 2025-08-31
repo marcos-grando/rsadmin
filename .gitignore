@@ -18,8 +18,8 @@ coverage
 .eslintcache
 *.local
 
+zIgnore/
 trash/
-public/infos/
 .vscode/*
 !.vscode/extensions.json
 .idea

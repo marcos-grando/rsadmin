@@ -1,7 +1,7 @@
 import { cookieOpts, issueAccessToken, issueRefreshToken } from "../../helpers/util/authAuxiliar.js";
 import bcrypt from 'bcryptjs';
 
-export default async function Login(req, res) {
+export default async function login(req, res) {
     const { password } = req.body || {};
     if (typeof password !== 'string') return res.status(400).json({ error: 'Senha obrigatória' });
 
