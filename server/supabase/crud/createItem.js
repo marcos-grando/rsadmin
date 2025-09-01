@@ -26,7 +26,7 @@ export default async function createItem(req, res) {
         if (error) throw error;
 
         return res.status(201).json({ data });
-        
+
     } catch (err) {
         console.error('createItem error: ', err);
         return res.status(500).json({ error: err.message });

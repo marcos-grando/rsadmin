@@ -35,10 +35,12 @@ export async function organizedFields(reqBody, theFields, files, key) {
     if (key === KEY_CREATE_RESID || key === KEY_UPDATE_RESID) { //'create/update_resid'
         const obsExtradb = parseObj(theFields?.extradbRaw);
 
-        const { data: imgs } = await imageManager(reqBody, files, { folderBase: 'residenciais' });
+        const theFolderBase = theFields?.fields?.name ? `residenciais/${theFields.fields.name}` : 'residenciais';
+        const { data: imgs } = await imageManager(reqBody, files, { folderBase: theFolderBase });
 
-        if (imgs?.logo) theFields.fields.logo = imgs.logo;
-        if (imgs?.thumb) theFields.fields.thumb = imgs.thumb;
+        // if (imgs?.logo) theFields.fields.logo = imgs.logo;
+        if ('logo' in imgs) { theFields.fields.logo = imgs.logo ?? null; };
+        if ('thumb' in imgs) { theFields.fields.thumb = imgs.thumb ?? null; };
 
         const mergedExtradb = {
             ...obsExtradb,
@@ -56,7 +58,9 @@ export async function organizedFields(reqBody, theFields, files, key) {
     };
 
     if (key === KEY_CREATE_CONST || key === KEY_UPDATE_CONST) { //'create/update_const'
-        const { data: imgs } = await imageManager(reqBody, files, { folderBase: 'construtoras' });
+
+        const theFolderBase = theFields?.fields?.name ? `construtoras/${theFields.fields.name}` : 'construtoras';
+        const { data: imgs } = await imageManager(reqBody, files, { folderBase: theFolderBase });
 
         if (imgs?.logo) theFields.fields.logo = imgs.logo;
 

@@ -44,7 +44,13 @@ function FileWizard({ formData, setFormData, the_label, the_path, isRequired, st
     };
 
     const handleRemove = (index) => {
-        const updatedFiles = fileList.filter((_, i) => i !== index);
+
+        const updatedFiles = fileList.map((each, i) => {
+            if (i === index) {
+                return { ...each, url: undefined }
+            };
+            return { ...each };
+        });
 
         updateWithPath(setFormData, the_path, () => updatedFiles);
     };

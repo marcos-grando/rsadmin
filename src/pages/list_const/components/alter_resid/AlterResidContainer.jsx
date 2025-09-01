@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./AlterResidContainer.module.scss";
 import { useUpdateResid } from "../../../../utilities/hooks/useCrudBase";
 import { buildFormData } from "../../../../utilities/util/buildFormData";
@@ -12,6 +12,25 @@ function AlterResidContainer({ formData, setFormData, resetForms, handleResetInf
     const { updateResid, loading, error } = useUpdateResid();
     const [sucess, setSucess] = useState(null);
     const [nameForMsg, setNameForMsg] = useState("");
+
+    // useEffect(() => {
+    //     const fd = new FormData();
+    //     buildFormData(fd, formData);
+
+    //     setTimeout(() => {
+    //         const allowed = ['aptoimg', 'condimg', 'plantimg', 'logo', 'thumb'];
+    //         console.log("=================================================================================================================================")
+    //         for (const [k, v] of fd.entries()) {
+    //             const isAllowed = allowed.some(a => k.startsWith(a + '['));
+    //             const isIgnored = k.endsWith('[title]') || k.endsWith('[desc]');
+    //             if (isAllowed && !isIgnored) console.log(k, v);
+    //         }
+    //         console.log("=================================================================================================================================")
+
+    //         console.log("formData: ", formData);
+    //     }, 1200);
+
+    // }, [formData]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

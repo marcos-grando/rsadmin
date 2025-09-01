@@ -53,7 +53,6 @@ export const buildLogicFiles = (key, val, fd, name, arr) => {
     return false;
 };
 
-
 // Constrói o FormData para enviar ao hook -> api;
 // aqui vai lidar com as diversas variantes de tipo (file, array, objeto aninhado, etc);
 export const buildFormData = (fd, data, root = '') => {
