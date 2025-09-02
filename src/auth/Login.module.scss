@@ -20,6 +20,15 @@
     place-items: center;
 }
 
+@keyframes showLogin {
+    0% { 
+        transform: translateY(70%);
+        opacity: 0;
+    } 100% { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
 .main .login {
     background-color: var(--tcolor-3);
     box-shadow: 15px 15px 20px rgba(1, 15, 31, 0.382);
@@ -30,6 +39,8 @@
     display: flex;
     align-items: center;
     overflow: hidden;
+
+    animation: showLogin 550ms ease 1 forwards;
 
     .loginImg {
         height: 100%; width: 40%;
