@@ -13,21 +13,22 @@ function InfosTitle({ grid_columns, field_titles, sort, setSort }) {
     return (
         <>
             <div className={style.infosTitle} style={{ gridTemplateColumns: grid_columns.grid }}>
-                <div className={style.uniq}><h3>#</h3></div>
 
                 {field_titles.map((item, i) => (
-                    <div className={item.classe} key={i}>
-                        <h3>
+                    <div className={`${item?.uniq ? style.uniq : item.classe}`} key={i}>
+                        {item?.uniq ? (
+                            <h3>{item.title}</h3>
+                        ) : (
                             <button onClick={() => handleSort(item.optSort)}
                                 className={sort.field === item.optSort ? style.focus : ""}
                             >
-                                {item.title} <IconSort size={12} />
+                                <h3>{item.title} <IconSort size={12} /></h3>
                             </button>
-                        </h3>
+                        )}
                     </div>
                 ))}
-                <div className={style.uniq}><h3>---</h3></div>
-                <div className={style.uniq}><h3>---</h3></div>
+                {/* <div className={style.uniq}><h3>---</h3></div>
+                <div className={style.uniq}><h3>---</h3></div> */}
             </div>
         </>
     )

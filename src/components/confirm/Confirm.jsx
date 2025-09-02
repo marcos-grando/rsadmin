@@ -4,15 +4,16 @@ import { useConfirm } from "../../utilities/contexts/ContextConfirm";
 import ConfirmContent from "./ConfirmContent";
 
 function Confirm() {
-    const { confirmation, visible } = useConfirm();
+    const { confirmation, visible, loadFetch } = useConfirm();
     const dialogRef = useRef(null);
 
     const onKeyDown = useCallback((e) => {
         if (e.key === "Escape") {
             e.stopPropagation();
+            if (loadFetch?.pending) return;
             confirmation(false);
         }
-    }, [confirmation]);
+    }, [confirmation, loadFetch?.pending]);
 
     useEffect(() => {
         if (!visible) return;

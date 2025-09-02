@@ -28,7 +28,7 @@ export const msgFinaleDelete = (key, name, count) => {
             yes: "Sim, excluir",
         };
     };
-    if (key === KEY_UPDATE_RESID) {
+    if (key === KEY_DELETE_RESID) {
         msgFinale = {
             title: "Excluir Residencial?",
             text: [`"${name}" será excluído permanentemente.`],

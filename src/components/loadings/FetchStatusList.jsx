@@ -4,6 +4,7 @@ import { Building2 as AllTypes, House, Building as Empreend, InspectionPanel as 
 
 const ICONS = {
     alltypes: <AllTypes size={80} />,
+    construtoras: <Empreend size={80} strokeWidth={1} />,
     residenciais: <Empreend size={80} strokeWidth={1} />,
     casas: <House size={80} />,
     terrenos: <Terreno size={80} />,

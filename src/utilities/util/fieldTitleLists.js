@@ -4,18 +4,20 @@
 // fieldTitles definem o nome aparente título e o valor de cada coluna;
 
 const GRID_TEMPLATES = {
-    6: "minmax(40px,60px) minmax(180px,2fr) minmax(160px,1fr) minmax(150px,1fr) minmax(50px,70px) 70px",
-    7: "minmax(40px,60px) 110px minmax(180px,2fr) minmax(160px,1fr) minmax(150px,1fr) minmax(50px,70px) 70px",
+    5: "minmax(40px,60px) minmax(180px,2fr) minmax(160px,1fr) minmax(150px,1fr) minmax(50px,70px)",
+    6: "minmax(40px,60px) 110px minmax(180px,2fr) minmax(160px,1fr) minmax(150px,1fr) minmax(50px,70px)",
 };
 
 export const ALL_IMOVEIS = {
-    totalColumns: 7,
-    gridColumns: GRID_TEMPLATES[7],
+    totalColumns: 6,
+    gridColumns: GRID_TEMPLATES[6],
     fieldTitles: [
+        { title: "#", uniq: true },
         { title: "Tipo", optSort: "type" },
         { title: "Nome do Anúncio", optSort: "name" },
         { title: "Localização", optSort: "local" },
         { title: "A partir de", optSort: "valor" },
+        { title: "---", uniq: true },
     ]
 };
 export const CONST_CONSTRUTORAS = {
@@ -37,7 +39,7 @@ export const CONST_RESIDENCIAIS = {
     ]
 };
 
-// casas/fazendas/terrenos estão juntos, posteriormente separá-los (junto das APIs);
+// casas/fazendas/terrenos estão juntos, posteriormente separá-los;
 export const TYPE_IMOVEIS = {
     totalColumns: 6,
     gridColumns: GRID_TEMPLATES[6],
@@ -77,12 +79,12 @@ export const VIEW_MODE = {
     select_const: 'selectConst'     // Ao "Editar" uma construtora;
 };
 export const VIEW_TITLE = {
-    [VIEW_MODE?.the_consts]: { showBack: false, showHeader: true, theTitle: "Construtoras Registradas" },
-    [VIEW_MODE?.the_resids]: { showBack: true, showHeader: true, theTitle: "" },    // theTitle definido na aplicação;
-    [VIEW_MODE?.add_const]:  { showBack: true, showHeader: false, theTitle: "Adicionando Construtora..." },
-    [VIEW_MODE?.add_resid]:  { showBack: true, showHeader: false, theTitle: "Adicionando Residencial..." },
-    [VIEW_MODE?.select_resid]: { showBack: true, showHeader: false, theTitle: "" }, // theTitle definido na aplicação;
-    [VIEW_MODE?.select_const]: { showBack: true, showHeader: false, theTitle: ""}   // theTitle definido na aplicação;
+    [VIEW_MODE?.the_consts]: { showBack: false, showHeader: true, showDelete: false, theTitle: "Construtoras Registradas" },
+    [VIEW_MODE?.the_resids]: { showBack: true, showHeader: true, showDelete: true, theTitle: "" },    // theTitle definido na aplicação;
+    [VIEW_MODE?.add_const]: { showBack: true, showHeader: false, showDelete: false, theTitle: "Adicionando Construtora..." },
+    [VIEW_MODE?.add_resid]: { showBack: true, showHeader: false, showDelete: false, theTitle: "Adicionando Residencial..." },
+    [VIEW_MODE?.select_resid]: { showBack: true, showHeader: false, showDelete: true, theTitle: "" }, // theTitle definido na aplicação;
+    [VIEW_MODE?.select_const]: { showBack: true, showHeader: false, showDelete: true, theTitle: "" }   // theTitle definido na aplicação;
 }
 
 export const VIEW_PLACEHOLDER = {

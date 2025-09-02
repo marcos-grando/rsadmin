@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ListContentDetails from "./ListContentDetails";
 
-function ListContentBuildPages({ grid_columns, field_titles, contentSorted, sort, setSort, theOptSelect, onDeleteClick, style }) {
+function ListContentBuildPages({ grid_columns, field_titles, contentSorted, sort, setSort, theOptSelect, style }) {
 
     const theListRef = useRef(null);
     const itemRef = useRef(null);
@@ -54,7 +54,6 @@ function ListContentBuildPages({ grid_columns, field_titles, contentSorted, sort
                     sort={sort}
                     setSort={setSort}
                     theOptSelect={theOptSelect}
-                    onDeleteClick={onDeleteClick}
                     styleContent={style.contentList}
                 />
 

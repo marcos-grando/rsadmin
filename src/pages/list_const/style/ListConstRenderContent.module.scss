@@ -87,6 +87,7 @@
 }
 .toggleSpace {
     height: 100% !important;
+    min-height: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -106,6 +107,9 @@
         position: relative;
         transition: color 150ms ease-out;
 
+        &.deleteButton {
+            padding: 0 0.75rem;
+        }
         &::after {
             content: "";
             height: 100%; width: 100%;

@@ -6,7 +6,7 @@ function ListConstModeToggle({ fetchStatus, optSelects, setOptSelects, searchCon
 
     const [viewMode, setViewMode] = useState(VIEW_MODE?.the_consts);
 
-    const { theTitle, showHeader, showBack, isEditConst } = useMemo(() => {
+    const { theTitle, showHeader, showDelete, showBack, isEditConst } = useMemo(() => {
         const item = VIEW_TITLE[viewMode] || {};
         return {
             ...item,
@@ -50,7 +50,7 @@ function ListConstModeToggle({ fetchStatus, optSelects, setOptSelects, searchCon
             setOptSelects={setOptSelects}
             viewMode={viewMode}                         // State com null/addConst/addResid
             handleAction={handleAction}                 // Atualiza State viewMode
-            headerConfig={{ theTitle, showBack, showHeader, isEditConst }}
+            headerConfig={{ theTitle, showBack, showDelete, showHeader, isEditConst }}
             dataSearch={dataSearch}                     // valor real digitado no input
             handleDataSearch={handleDataSearch}         // utiliza o value do input para atualizar a lista correta (const : resid)
             searchConstData={searchConstData}           // lista de construtora filtrada pelo input

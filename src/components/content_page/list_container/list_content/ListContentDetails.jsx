@@ -2,7 +2,7 @@ import React from "react";
 import InfosTitle from "../item_titles/InfosTitle";
 import InfosItem from "../item_infos/InfosItem";
 
-function ListContentDetails({ grid_columns, field_titles, currentItems, theListRef, itemRef, start, sort, setSort, theOptSelect, onDeleteClick, styleContent }) {
+function ListContentDetails({ grid_columns, field_titles, currentItems, theListRef, itemRef, start, sort, setSort, theOptSelect, styleContent }) {
 
     return (
         <>
@@ -19,7 +19,6 @@ function ListContentDetails({ grid_columns, field_titles, currentItems, theListR
                         iCont={i + 1}
                         itemRef={i === 0 ? itemRef : null}
                         theOptSelect={theOptSelect}
-                        onDeleteClick={onDeleteClick}
                     />
                 ))}
             </ul>

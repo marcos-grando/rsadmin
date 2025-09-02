@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ListContentBuildPages from "./ListContentBuildPages";
 
-function ListContentArraySorted({ originalList, grid_columns, field_titles, theOptSelect, onDeleteClick, style }) {
+function ListContentArraySorted({ originalList, grid_columns, field_titles, theOptSelect, style }) {
     
     const [contentSorted, setContentSorted] = useState([]);
     const [sort, setSort] = useState({ field: "name", order: "asc" });
@@ -32,7 +32,6 @@ function ListContentArraySorted({ originalList, grid_columns, field_titles, theO
                 field_titles={field_titles}
                 sort={sort} setSort={setSort}
                 theOptSelect={theOptSelect}
-                onDeleteClick={onDeleteClick}
                 style={style}
             />
         </>

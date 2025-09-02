@@ -31,13 +31,7 @@
     }
     &:hover {
         background-color: var(--terciary-2);
-        
-        .delete {
-            z-index: 1001;
-            &:hover {
-                background-color: red;
-            }
-        }
+
         .link {
             position: relative;
 

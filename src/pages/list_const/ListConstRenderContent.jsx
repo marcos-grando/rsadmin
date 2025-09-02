@@ -17,9 +17,9 @@ function ListConstRenderContent({ fetchStatus, optSelects, setOptSelects, viewMo
             case VIEW_MODE.add_resid:
                 return <NewResid constId={optSelects?.opt_const?.id} handleViewMode={handleAction} />;
             case VIEW_MODE.select_resid:
-                return <AlterResid idResidSelect={optSelects?.opt_resid?.id} handleViewMode={handleAction} /> // <p>Item Selecionada Resid</p>;
+                return <AlterResid idResidSelect={optSelects?.opt_resid?.id} handleViewMode={handleAction} />
             case VIEW_MODE?.select_const:
-                return <AlterConst idConstSelect={optSelects?.opt_const?.id} handleViewMode={handleAction} /> // <p>Item Selecionada Resid</p>;
+                return <AlterConst idConstSelect={optSelects?.opt_const?.id} handleViewMode={handleAction} />
             default:
                 return (
                     <ListConstTheList
