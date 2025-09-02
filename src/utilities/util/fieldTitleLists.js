@@ -21,21 +21,25 @@ export const ALL_IMOVEIS = {
     ]
 };
 export const CONST_CONSTRUTORAS = {
-    totalColumns: 6,
-    gridColumns: GRID_TEMPLATES[6],
+    totalColumns: 5,
+    gridColumns: GRID_TEMPLATES[5],
     fieldTitles: [
+        { title: "#", uniq: true },
         { title: "Construtora", optSort: "name" },
         { title: "Região principal", optSort: "local" },
         { title: "Média de R$", optSort: "valor" },
+        { title: "---", uniq: true },
     ]
 };
 export const CONST_RESIDENCIAIS = {
-    totalColumns: 6,
-    gridColumns: GRID_TEMPLATES[6],
+    totalColumns: 5,
+    gridColumns: GRID_TEMPLATES[5],
     fieldTitles: [
+        { title: "#", uniq: true },
         { title: "Empreendimento", optSort: "name" },
         { title: "Localização", optSort: "local" },
         { title: "A partir de", optSort: "valor" },
+        { title: "---", uniq: true },
     ]
 };
 

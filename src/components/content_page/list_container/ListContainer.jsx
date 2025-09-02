@@ -8,12 +8,7 @@ function ListContainer({ originalList, titleList, theOptSelect, totalColumns, gr
     const grid_columns = {
         total: totalColumns,
         grid: gridColumns
-        // totalColumns === 6 ? (
-        //     "minmax(40px, 60px) 110px minmax(180px, 2fr) minmax(160px, 1fr) minmax(150px, 1fr) 70px"
-        // ) : (
-        //     "minmax(40px, 60px) minmax(180px, 2fr) minmax(160px, 1fr) minmax(150px, 1fr) 70px"
-        // )
-    }
+    };
 
     const field_titles = useMemo(() => fieldTitles, [fieldTitles]);
 

@@ -16,7 +16,7 @@ function ListContentDetails({ grid_columns, field_titles, currentItems, theListR
                     <InfosItem key={start + i}
                         eachItem={eachItem}
                         grid_columns={grid_columns}
-                        iCont={i + 1}
+                        iCont={start + i + 1}
                         itemRef={i === 0 ? itemRef : null}
                         theOptSelect={theOptSelect}
                     />

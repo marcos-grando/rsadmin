@@ -1,87 +1,92 @@
 @use "../../utilities/styles/variables" as *;
 
-.mainContainer {
-    // height: 100%; width: 100%;
+.mainDashboard {
     height: auto; width: 100%;
-    max-width: 1720px;
     padding: 2rem;
-    margin: 0 auto;
 
     flex: 1;
     min-height: 0;
 
-    display: grid;
-    grid-template-columns: repeat(20, 1fr);
-    grid-template-rows: auto;
-    gap: 1rem;
-    container-type: inline-size;
-    container-name: dashboard;
-
     overflow-y: auto;
 
-    section {
-        height: auto; width: 100%;
-        display: flex;
-        position: relative;
+    .dashboardContent {
+        max-width: 1720px;
+        margin: 0 auto;
 
-        &.kpiWrapper > div {
-            height: 100%; width: 100%;
+        flex: 1;
+        min-height: 0;
 
-            &.loading {
-                background-color: rgba(36, 34, 34, 0.13);
-                box-shadow: -1px 2px 7px var(--terciary-2);    
+        display: grid;
+        grid-template-columns: repeat(20, 1fr);
+        grid-template-rows: auto;
+        gap: 1rem;
+        container-type: inline-size;
+        container-name: dashboard;
+
+        section {
+            height: auto; width: 100%;
+            display: flex;
+            position: relative;
+    
+            &.kpiWrapper > div {
+                height: 100%; width: 100%;
+    
+                &.loading {
+                    background-color: rgba(36, 34, 34, 0.13);
+                    box-shadow: -1px 2px 7px var(--terciary-2);    
+                }
+            }
+            &:not(.kpiWrapper) > div, & article {
+                background-color: $divs_infos_bg;
+                box-shadow: 0px 4px 6px var(--terciary-5);
+                border-bottom: 1px solid rgba(43, 43, 43, .096);
+                height: 100%; width: 100%;
+            }
+            &.kpiWrapper > .loading {
+                min-height: 180px;
+            }
+            &:not(.kpiWrapper) > .loading {
+                min-height: 320px;
             }
         }
-        &:not(.kpiWrapper) > div, & article {
-            background-color: $divs_infos_bg;
-            box-shadow: 0px 4px 6px var(--terciary-5);
-            border-bottom: 1px solid rgba(43, 43, 43, .096);
-            height: 100%; width: 100%;
-        }
-        &.kpiWrapper > .loading {
-            min-height: 180px;
-        }
-        &:not(.kpiWrapper) > .loading {
-            min-height: 320px;
-        }
-    }
-    .kpiWrapper         { grid-row: 1; grid-column: 1/21; }
-
-    .localDonuts       { grid-row: 2; grid-column: 1/8; }
-    .localPriceBars  { grid-row: 2; grid-column: 8/21; }
-
-    .valueconstWrapper  { grid-row: 3; grid-column: 1/14; }
-    .constWrapper       { grid-row: 3; grid-column: 14/21; }
-    
-    .localWrapper       { grid-row: 4; grid-column: 1/11; }
-    .pendingWrapper     { grid-row: 4; grid-column: 11/21; }
-
-
-    @media (max-width: 1075px) {
-        .kpiWrapper         { grid-row: 1; grid-column: 1/21;  }
-        .localPriceBars     { grid-row: 2; grid-column: 1/21;  }
-        .localDonuts        { grid-row: 3; grid-column: 1/11;  }
-        .constWrapper       { grid-row: 3; grid-column: 11/21; }
-        .valueconstWrapper  { grid-row: 4; grid-column: 1/21;  }
-        .localWrapper       { grid-row: 5; grid-column: 1/11;  }
-        .pendingWrapper     { grid-row: 5; grid-column: 11/21; }
-    }
-    @container dashboard (max-width: 975px) {
-        .kpiWrapper         { grid-row: 1; grid-column: 1/21;  }
-        .localPriceBars     { grid-row: 2; grid-column: 1/21;  }
-        .localDonuts        { grid-row: 3; grid-column: 1/11;  }
-        .constWrapper       { grid-row: 3; grid-column: 11/21; }
-        .valueconstWrapper  { grid-row: 4; grid-column: 1/21;  }
-        .localWrapper       { grid-row: 5; grid-column: 1/11;  }
-        .pendingWrapper     { grid-row: 5; grid-column: 11/21; }
-    }
-    @media (max-width: 615px) {
         .kpiWrapper         { grid-row: 1; grid-column: 1/21; }
-        .localDonuts        { grid-row: 2; grid-column: 1/21; }
-        .localPriceBars     { grid-row: 3; grid-column: 1/21; }
-        .constWrapper       { grid-row: 4; grid-column: 1/21; }
-        .valueconstWrapper  { grid-row: 5; grid-column: 1/21; }
-        .localWrapper       { grid-row: 6; grid-column: 1/21; }
-        .pendingWrapper     { grid-row: 7; grid-column: 1/21; }
+    
+        .localDonuts       { grid-row: 2; grid-column: 1/8; }
+        .localPriceBars  { grid-row: 2; grid-column: 8/21; }
+    
+        .valueconstWrapper  { grid-row: 3; grid-column: 1/14; }
+        .constWrapper       { grid-row: 3; grid-column: 14/21; }
+        
+        .localWrapper       { grid-row: 4; grid-column: 1/11; }
+        .pendingWrapper     { grid-row: 4; grid-column: 11/21; }
+    
+    
+        @media (max-width: 1075px) {
+            .kpiWrapper         { grid-row: 1; grid-column: 1/21;  }
+            .localPriceBars     { grid-row: 2; grid-column: 1/21;  }
+            .localDonuts        { grid-row: 3; grid-column: 1/11;  }
+            .constWrapper       { grid-row: 3; grid-column: 11/21; }
+            .valueconstWrapper  { grid-row: 4; grid-column: 1/21;  }
+            .localWrapper       { grid-row: 5; grid-column: 1/11;  }
+            .pendingWrapper     { grid-row: 5; grid-column: 11/21; }
+        }
+        @media (max-width: 975px) {
+            .kpiWrapper         { grid-row: 1; grid-column: 1/21;  }
+            .localPriceBars     { grid-row: 2; grid-column: 1/21;  }
+            .localDonuts        { grid-row: 3; grid-column: 1/11;  }
+            .constWrapper       { grid-row: 3; grid-column: 11/21; }
+            .valueconstWrapper  { grid-row: 4; grid-column: 1/21;  }
+            .localWrapper       { grid-row: 5; grid-column: 1/11;  }
+            .pendingWrapper     { grid-row: 5; grid-column: 11/21; }
+        }
+        @media (max-width: 615px) {
+            .kpiWrapper         { grid-row: 1; grid-column: 1/21; }
+            .localDonuts        { grid-row: 2; grid-column: 1/21; }
+            .localPriceBars     { grid-row: 3; grid-column: 1/21; }
+            .constWrapper       { grid-row: 4; grid-column: 1/21; }
+            .valueconstWrapper  { grid-row: 5; grid-column: 1/21; }
+            .localWrapper       { grid-row: 6; grid-column: 1/21; }
+            .pendingWrapper     { grid-row: 7; grid-column: 1/21; }
+        }
     }
 }

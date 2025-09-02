@@ -74,18 +74,20 @@ function Home() {
     ]
 
     return (
-        <div className={styles.mainContainer}>
-            {divsDashboard.map((each, i) => (
-                <section key={i} className={each?.isClass}>
-                    {each?.isValid ?
-                        each?.isCompn
-                        :
-                        <div className={styles.loading}>
-                            <Loading />
-                        </div>
-                    }
-                </section>
-            ))}
+        <div className={styles.mainDashboard}>
+            <div className={styles.dashboardContent}>
+                {divsDashboard.map((each, i) => (
+                    <section key={i} className={each?.isClass}>
+                        {each?.isValid ?
+                            each?.isCompn
+                            :
+                            <div className={styles.loading}>
+                                <Loading />
+                            </div>
+                        }
+                    </section>
+                ))}
+            </div>
         </div>
     );
 }

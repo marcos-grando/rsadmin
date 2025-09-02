@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./FetchStatusList.module.scss";
-import { Building2 as AllTypes, House, Building as Empreend, InspectionPanel as Terreno, TentTree as Fazenda } from "lucide-react";
+import { Building2 as AllTypes, House, Building as Empreend, InspectionPanel as Terreno, TentTree as Fazenda, ConstructionIcon } from "lucide-react";
 
 const ICONS = {
     alltypes: <AllTypes size={80} />,
@@ -8,7 +8,8 @@ const ICONS = {
     residenciais: <Empreend size={80} strokeWidth={1} />,
     casas: <House size={80} />,
     terrenos: <Terreno size={80} />,
-    fazendas: <Fazenda size={80} />
+    fazendas: <Fazenda size={80} />,
+    config: <ConstructionIcon size={80} strokeWidth={1} />
 };
 
 function FetchStatusList({ theTitle, theMsg, typePage, isLoading }) {

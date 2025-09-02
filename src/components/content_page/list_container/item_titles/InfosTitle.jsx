@@ -13,7 +13,6 @@ function InfosTitle({ grid_columns, field_titles, sort, setSort }) {
     return (
         <>
             <div className={style.infosTitle} style={{ gridTemplateColumns: grid_columns.grid }}>
-
                 {field_titles.map((item, i) => (
                     <div className={`${item?.uniq ? style.uniq : item.classe}`} key={i}>
                         {item?.uniq ? (
@@ -27,8 +26,6 @@ function InfosTitle({ grid_columns, field_titles, sort, setSort }) {
                         )}
                     </div>
                 ))}
-                {/* <div className={style.uniq}><h3>---</h3></div>
-                <div className={style.uniq}><h3>---</h3></div> */}
             </div>
         </>
     )

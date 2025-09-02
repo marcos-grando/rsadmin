@@ -41,9 +41,6 @@ function ListContentBuildPages({ grid_columns, field_titles, contentSorted, sort
     return (
         <>
             <div className={style.contentScroll}>
-                {/* <ul ref={theListRef} className={style.contentList}>
-                    
-                </ul> */}
                 <ListContentDetails
                     grid_columns={grid_columns}
                     field_titles={field_titles}
