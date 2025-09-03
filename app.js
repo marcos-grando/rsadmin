@@ -45,9 +45,9 @@ const fields = {
     apis_resid: [
         { name: 'logo', maxCount: 1 },
         { name: 'thumb', maxCount: 1 },
-        { name: 'aptoimg', maxCount: 10 },
-        { name: 'condimg', maxCount: 10 },
-        { name: 'plantimg', maxCount: 10 }
+        { name: 'aptoimg', maxCount: 20 },
+        { name: 'condimg', maxCount: 20 },
+        { name: 'plantimg', maxCount: 20 }
     ],
     apis_const: [{ name: 'logo', maxCount: 1 }]
 };

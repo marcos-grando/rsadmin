@@ -16,15 +16,15 @@ function FileWizard({ formData, setFormData, the_label, the_path, isRequired, st
         if (!newFiles.length) return;
 
         const totalFiles = fileList.length + newFiles.length;
-        const ignored = Math.max(0, totalFiles - 10);
+        const ignored = Math.max(0, totalFiles - 20);
 
-        const updatedFiles = [...fileList, ...newFiles.map((file) => ({ url: file, public_id: null, title: "", desc: "" }))].slice(0, 10);
+        const updatedFiles = [...fileList, ...newFiles.map((file) => ({ url: file, public_id: null, title: "", desc: "" }))].slice(0, 20);
 
         if (ignored > 0) {
             showMessage(
                 "warning",
                 (<>
-                    <h2>Cuidado! Ultrapassou 10 arquivos.</h2>
+                    <h2>Cuidado! Ultrapassou 20 arquivos.</h2>
                     <p>Você selecionou mais imagens do que o permitido.</p>
                     <p>Arquivo(s) ignorado(s): {ignored}</p>
                 </>)
@@ -34,7 +34,7 @@ function FileWizard({ formData, setFormData, the_label, the_path, isRequired, st
         updateWithPath(setFormData, the_path, () => updatedFiles);
     };
 
-    const blockMoreFile = fileList.length >= 10;
+    const blockMoreFile = fileList.length >= 20;
 
     const handleChangeMeta = (index, field, value) => {
         const updated = [...fileList];
@@ -71,7 +71,7 @@ function FileWizard({ formData, setFormData, the_label, the_path, isRequired, st
                     blockMoreFile={blockMoreFile}
                     styles={styles}
                 />
-                <h3 className={styles.fileQntd}>Máximo de arquivos: {fileList.length} / 10</h3>
+                <h3 className={styles.fileQntd}>Máximo de arquivos: {fileList.length} / 20</h3>
             </div>
 
             <FilePreviewItem
