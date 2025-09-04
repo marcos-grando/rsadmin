@@ -35,7 +35,7 @@ export async function organizedFields(reqBody, theFields, files, key) {
     if (key === KEY_CREATE_RESID || key === KEY_UPDATE_RESID) { //'create/update_resid'
         const obsExtradb = parseObj(theFields?.extradbRaw);
 
-        const theFolderBase = theFields?.fields?.name ? `residenciais/${theFields.fields.name}` : 'residenciais';
+        const theFolderBase = theFields?.fields?.name ? `residenciais/${slugify(theFields.fields.name)}` : 'residenciais';
         const { data: imgs } = await imageManager(reqBody, files, { folderBase: theFolderBase });
 
         // if (imgs?.logo) theFields.fields.logo = imgs.logo;
