@@ -68,7 +68,7 @@ const findFile = (files, field, idx = null) => {
 const handlers = {
     replace:
         async ({ file, public_id, folder }) => {
-            
+
             if (!file) return null; // não faz replace sem arquivo
             const uploaded = await uploadImage(file.buffer, folder);
 

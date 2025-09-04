@@ -59,7 +59,7 @@ export async function organizedFields(reqBody, theFields, files, key) {
 
     if (key === KEY_CREATE_CONST || key === KEY_UPDATE_CONST) { //'create/update_const'
 
-        const theFolderBase = theFields?.fields?.name ? `construtoras/${theFields.fields.name}` : 'construtoras';
+        const theFolderBase = theFields?.fields?.name ? `construtoras/${slugify(theFields.fields.name)}` : 'construtoras';
         const { data: imgs } = await imageManager(reqBody, files, { folderBase: theFolderBase });
 
         if (imgs?.logo) theFields.fields.logo = imgs.logo;
