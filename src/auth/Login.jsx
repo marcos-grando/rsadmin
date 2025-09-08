@@ -25,7 +25,7 @@ export default function Login({ onAuthed }) {
         <main className={style.main}>
             <div className={style.login}>
                 <div className={style.loginImg}>
-                    <img src="https://res.cloudinary.com/marcos-grando/image/upload/v1756171652/login_uhwsjp.jpg" alt="Fotografia de um prédio" />
+                    <img src="/login_uhwsjp.jpg" alt="Fotografia de um prédio" />
                 </div>
                 <form onSubmit={submit} className={style.loginForm}>
                     <h1>Acesso Administrativo</h1>
