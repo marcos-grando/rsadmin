@@ -13,11 +13,16 @@
 .main {
     background: linear-gradient(135deg, var(--tcolor-3) 20%, var(--tcolor-5) 100%);
     min-height: 100dvh; min-width: 100dvw;
+    padding: 2rem;
 
     color: white;
 
     display: grid;
     place-items: center;
+
+    @media (max-width: 920px) {
+        padding: 1rem;
+    }
 }
 
 @keyframes showLogin {
@@ -33,8 +38,8 @@
     background-color: var(--tcolor-3);
     box-shadow: 15px 15px 20px rgba(1, 15, 31, 0.382);
     border-radius: 15px;
-    // height: 240px; width: 780px;
-    height: 280px; width: 840px;
+    height: 280px; width: 100%;
+    max-width: 840px;
 
     display: flex;
     align-items: center;
@@ -53,7 +58,6 @@
             object-position: center;
         }
     }
-
     .loginForm {
         height: 80%; width: 60%;
         padding: 2rem;
@@ -107,6 +111,46 @@
         }
         .erro {
             color: #f87171;
+        }
+    }
+
+    @media (max-width: 920px) {
+        height: 540px; width: 100%;
+        max-width: 300px;
+        flex-direction: column;
+        
+        .loginImg {
+            height: 55%; width: 100%;
+        }
+        .loginForm {
+            height: 45%; width: 100%;
+            padding: 1rem;
+            padding-top: 5px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+
+            h1 {
+                font-size: 1.25rem;
+                margin-bottom: 10px;
+            }
+            input {
+                border-radius: 5px;
+                padding: 12px;
+            }
+            button {
+                border-radius: 5px;
+                padding: 12px;
+    
+                &:hover { 
+                    border-color: var(--tcolor-3);
+                    h3 {
+                        color: rgba(245, 245, 245, 0.839);
+                    }
+                }
+            }
         }
     }
 }
