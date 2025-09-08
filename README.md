@@ -1,6 +1,7 @@
 # RSAdmin
 
 Sistema criado utilizando React, Vite, Node.js (Express), com banco de dados Supabase.
+OBS: --> Ainda sem versão mobile! <--
 
 ## Servidores instanciados no projeto
 
