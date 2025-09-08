@@ -8,20 +8,6 @@
     0%   { left: -150%; }
     100% { left: 150%; }
 }
-// .loading {
-//     height: 100%; width: 100%;
-//     opacity: 0.25;
-
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-    
-//     svg {
-//         height: 250px; width: 250px;
-//         color: var(--secondary-1);
-//         animation: loading 1550ms linear infinite;
-//     }
-// }
 .container {
     height: 100%; width: 100%;
     flex: 1;

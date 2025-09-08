@@ -26,7 +26,7 @@ Na execução do projeto é instanciado dois servidores: um backend utilizando E
 │   ├── cloudinary/                        # upload/delete de imagens
 │   └── util/                              # funções úteis no geral
 ├── src/                                   # frontend (React + Vite)
-├── app.js                                 # todas rotas declaradas (sem prefixo /api)
+├── app.js                                 # todas rotas declaradas
 └── .env.example                           # Como deve ficar .env
 ```
 
