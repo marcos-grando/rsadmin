@@ -4,8 +4,8 @@ $padd_container: $dashboard_padding_container;
 $radius: $dashboard_radius_areas;
 $bg: $dashboard_bg_areas;
 
-$color_grid: rgb(43, 37, 37);
-$color_lineMain: rgb(163, 45, 45);
+$color_grid: rgba(46, 41, 41, 0.26);
+$color_lineMain: var(--atrative-1);
 $color_label: rgb(179, 162, 162);
 
 .container {
@@ -151,16 +151,6 @@ $color_label: rgb(179, 162, 162);
     
                         z-index: 103;
                     }
-                    .columnMax {
-                        background-color: var(--atrative-2);
-                        width: 40%;
-    
-                        position: absolute;
-                        bottom: 0; right: 35%;
-                        transform: translateX(50%);
-    
-                        z-index: 101;
-                    }
                     .columnContent {
                         background-color: var(--atrative-4);
                         width: 40%;
@@ -171,9 +161,19 @@ $color_label: rgb(179, 162, 162);
     
                         z-index: 102;
                     }
+                    .columnMax {
+                        background-color: var(--atrative-2);
+                        width: 40%;
+    
+                        position: absolute;
+                        bottom: 0; right: 35%;
+                        transform: translateX(50%);
+    
+                        z-index: 101;
+                    }
                     
                     .columnContent, .columnMax, .columnMin {
-                        cursor: pointer;
+                        cursor: help;
 
                         &:hover {
                             border: 1px solid var(--primary-2);

@@ -70,7 +70,7 @@ const handlers = {
         async ({ file, public_id, folder }) => {
 
             if (!file) return null; // não faz replace sem arquivo
-            const uploaded = await uploadImage(file.buffer, folder);
+            const uploaded = await uploadImage(file.buffer, folder, file.originalname);
 
             if (public_id) {
                 try {
@@ -81,7 +81,7 @@ const handlers = {
             };
             return uploaded;
         },
-    add: async ({ file, folder }) => file ? uploadImage(file.buffer, folder) : null,
+    add: async ({ file, folder }) => file ? uploadImage(file.buffer, folder, file.originalname) : null,
     delete: async ({ public_id }) => { public_id && await deleteImage(public_id); return null; },
     keep: async ({ url, public_id }) => (url && public_id) ? { url, public_id } : null,
 };

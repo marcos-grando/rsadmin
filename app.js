@@ -35,7 +35,7 @@ app.use(express.json({ limit: '5mb' }));
 app.use(cookieParser());
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:5173', 'https://rsadmin-phi.vercel.app'],
+    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:5173', 'https://rsadmin-phi.vercel.app', 'https://raquelsadmin.vercel.app'],
     credentials: true
 }));
 

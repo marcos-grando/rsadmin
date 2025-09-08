@@ -1,4 +1,4 @@
-// MANTER SINCRONIZADO COM "src/utilities/util/theMasterKeys.js";
+// MANTER SINCRONIZADO COM "src/utilities/shared/theMasterKeys.js";
 
 import { KEY_CREATE_CONST, KEY_CREATE_RESID, KEY_DELETE_CONST, KEY_DELETE_RESID, KEY_SELECT_CONST, KEY_SELECT_RESID, KEY_UPDATE_CONST, KEY_UPDATE_RESID } from "../../shared/theMasterKeys.js";
 

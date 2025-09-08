@@ -21,7 +21,7 @@ import { KEYS_LIST } from "../../utilities/util/theMasterKeys";
 
 function Home() {
 
-    const { data, loading, error } = useReadList(KEYS_LIST?.KEY_HOME)
+    const { data, loading } = useReadList(KEYS_LIST?.KEY_HOME)
 
     const [kpiData, setKpiData] = useState(null);
     const [qntdLocalData, setQntdLocalData] = useState(null);
@@ -29,6 +29,7 @@ function Home() {
     const [mediaLocalData, setMediaLocalData] = useState(null);
     const [qntdConstData, setQntdConstData] = useState(null);
     const [topImoveisData, setTopImoveisData] = useState(null);
+
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -55,10 +56,6 @@ function Home() {
     }, [data]);
 
     useEffect(() => {
-        if (error) { setFetchStatus(prev => ({ ...prev, loading: loading })); };
-    }, [error]);
-
-    useEffect(() => {
         setIsLoading(loading);
     }, [loading]);
 
@@ -70,7 +67,7 @@ function Home() {
         { isValid: mediaConstData, isClass: styles.valueconstWrapper, isCompn: <MediaForConst data={mediaConstData} /> },
         { isValid: qntdConstData, isClass: styles.constWrapper, isCompn: <ForConst data={qntdConstData} /> },
         { isValid: topImoveisData, isClass: styles.localWrapper, isCompn: <TopImoveis data={topImoveisData} /> },
-        { isValid: isLoading, isClass: styles.pendingWrapper, isCompn: <PendingInfos /> }
+        { isValid: !isLoading, isClass: styles.pendingWrapper, isCompn: <PendingInfos /> }
     ]
 
     return (

@@ -94,6 +94,8 @@ $color_label: rgb(179, 162, 162);
                 display: flex;
                 flex-direction: column;
                 position: relative;
+
+                overflow: hidden;
     
                 .grid {
                     position: absolute;
@@ -168,6 +170,7 @@ $color_label: rgb(179, 162, 162);
                         transform: translateY(50%);
     
                         transition: background-color 250ms ease-out, transform 250ms ease-out;
+                        cursor: help;
                         z-index: 102;
                         
                         &:hover {

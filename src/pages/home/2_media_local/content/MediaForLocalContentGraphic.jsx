@@ -29,19 +29,19 @@ function MediaForLocalContentGraphic({ data, maxValue, style }) {
                     <div
                         title={`Menor valor: ${brlFormat(each.min)}\n${each.minType} ${each.minName}`}
                         className={style.columnMin}
-                        style={{ backgroundColor: COLORS[0], height: `${lawOfThree(each.min, maxValue)}%` }}>
+                        style={{ height: `${lawOfThree(each.min, maxValue)}%` }}>
                     </div>
                     
                     <div
                         title={`Média total: ${brlFormat(each.media)}`}
                         className={style.columnContent}
-                        style={{ backgroundColor: COLORS[1], height: `${lawOfThree(each.media, maxValue)}%` }}>
+                        style={{ height: `${lawOfThree(each.media, maxValue)}%` }}>
                     </div>
 
                     <div
                         title={`Maior valor: ${brlFormat(each.max)}\n${each.maxType} ${each.maxName}`}
                         className={style.columnMax}
-                        style={{ backgroundColor: COLORS[2], height: `${lawOfThree(each.max, maxValue)}%` }}>
+                        style={{ height: `${lawOfThree(each.max, maxValue)}%` }}>
                     </div>
                 </div>
             ))}

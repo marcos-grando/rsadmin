@@ -8,10 +8,9 @@ function MediaForConstContentGraphic({ data, maxValue, style }) {
     };
     const brlFormat = (valor) => {
         return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-    }
+    };
 
     return (
-
         <div className={style.contentGraphic}>
             <div className={style.grid}>
                 <div className={style.horizontalLines}>
