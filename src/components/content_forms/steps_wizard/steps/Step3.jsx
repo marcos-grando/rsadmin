@@ -1,18 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import style from "./style/Steps2e3.module.scss";
-import { validateStep } from "../../components/utility/validateStep";
-import { useListTablesMinor } from "../../../../utilities/hooks/useListTablesMinor";
+import { simulatorOptions } from "../../../../data/simulatorOptions";
 import TypesInputs from "../../components/TypesInputs";
 import TheTitleLabel from "../../components/TheTitleLabel";
 
-function Step3({ THE_STEP, setStatus, formData, setFormData, alterProps }) {
+function Step3({ THE_STEP, formData, setFormData, alterProps }) {
 
-    useEffect(() => {
-        const stepStatus = validateStep(formData, THE_STEP);
-        setStatus(prev => ({ ...prev, 3: stepStatus }))
-    }, [formData]);
-
-    const { opts_status } = useListTablesMinor();
+const { opts_status } = simulatorOptions;
 
     return (
         <div className={`step ${style?.step3}`}>

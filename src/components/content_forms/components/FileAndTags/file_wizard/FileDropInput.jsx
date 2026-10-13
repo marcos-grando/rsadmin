@@ -1,12 +1,12 @@
-import React from "react";
+import { IMAGE_ACCEPT } from "../../../../../utilities/util/simulatorModel";
 import { Upload as IconUpload } from "lucide-react";
 
-function FileDropInput({ handleFiles, isRequired, blockMoreFile, styles }) {
+function FileDropInput({ handleFiles, isRequired, blockMoreFile, styles, label }) {
     const handleDrop = (e) => {
         e.preventDefault();
         
         const droppedFiles = e.dataTransfer.files;
-        if (droppedFiles && droppedFiles.length > 0) {
+        if (!blockMoreFile && droppedFiles && droppedFiles.length > 0) {
             handleFiles({ target: { files: droppedFiles } });
         }
     };
@@ -19,7 +19,8 @@ function FileDropInput({ handleFiles, isRequired, blockMoreFile, styles }) {
         <div className={`${styles.fileInput} ${blockMoreFile ? styles.disabled : ""}`} onDrop={handleDrop} onDragOver={handleDragOver}>
             <input
                 type="file"
-                accept="image/*"
+                accept={IMAGE_ACCEPT}
+                aria-label={label}
                 multiple
                 disabled={blockMoreFile}
                 required={isRequired}

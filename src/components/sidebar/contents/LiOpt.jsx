@@ -6,10 +6,7 @@ function LiOpt({ opt, icon, into, setShowAside, liActive, setLiActive, isMob }) 
 
     return (
         <li className={`${style.item} ${liActive === into ? style.active : ""}`}
-            onClick={() => {
-                setLiActive(into);
-                isMob && setShowAside(false);
-            }}
+            onClick={() => { setLiActive(into); isMob && setShowAside(false); }}
         >
             <Link to={into}>
                 {icon} <span>{opt}</span>

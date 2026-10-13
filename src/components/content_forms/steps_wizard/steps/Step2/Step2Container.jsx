@@ -1,119 +1,68 @@
-import React, { useState, useEffect, useRef } from "react";
-import { fetchAddressByCep, reverseGeocode } from "./mapboxUtils";
+import { useState, useEffect, useRef } from "react";
 import MapInput from "./MapInput";
+import { reverseGeocode, fetchAddressByCep } from "./mapboxUtils";
+import style from "./OptionalMap.module.scss";
 
 const DEFAULT_COORDS = [-48.5651624333276, -27.59593609532341];
 
-function Step2Container({ formData, setFormData, style }) {
-    const attMapRef = useRef(null);
-    const debounce = useRef(null);
-    const searchDebounce = useRef(null);
-
-    const [searchText, setSearchText] = useState("");
-
-    const [coords, setCoords] = useState(() => {
-        const lng = parseFloat(formData.longitude);
-        const lat = parseFloat(formData.latitude);
-        return isNaN(lng) || isNaN(lat) ? DEFAULT_COORDS : [lng, lat];
+export default function Step2Container({ formData, setFormData }) {
+    const mapRef = useRef(null);
+    const requestRef = useRef(null);
+    const [search, setSearch] = useState("");
+    const [error, setError] = useState("");
+    const [busy, setBusy] = useState(false);
+    const [coords] = useState(() => {
+        const lng = Number(formData.longitude), lat = Number(formData.latitude);
+        return formData.longitude !== "" && formData.latitude !== "" && Number.isFinite(lng) && Math.abs(lng) <= 180 &&
+            Number.isFinite(lat) && Math.abs(lat) <= 90 ? [lng, lat] : DEFAULT_COORDS;
     });
-    const [isDefaultCoords, setIsDefaultCoords] = useState(true);
-
-    // Influencia no estilo do mapa ao iniciar, antes do usuário definir uma busca;
-    useEffect(() => {
-        const isDefault =
-            Math.abs(coords[0] - DEFAULT_COORDS[0]) < 0.000001 &&
-            Math.abs(coords[1] - DEFAULT_COORDS[1]) < 0.000001;
-
-        setIsDefaultCoords(isDefault);
-    }, [coords]);
-
-    // Atualiza formData com os dados que serão encontrados;
-    const updateForm = (updates) => {
-        setFormData(prev => {
-            const changed = Object.entries(updates).some(
-                ([key, val]) => String(prev[key]) !== String(val)
-            );
-            if (!changed) return prev;
-
-            const normalized = {};
-            for (const key in updates) {
-                normalized[key] = String(updates[key]);
-            }
-            return { ...prev, ...normalized };
-        });
+    useEffect(() => () => requestRef.current?.abort(), []);
+    const request = () => {
+        requestRef.current?.abort();
+        requestRef.current = new AbortController();
+        setError("");
+        setBusy(false);
+        return requestRef.current.signal;
     };
-
-    // ---> Campo de busca textual para movimentar o mapa;
-    useEffect(() => {
-        if (!searchText || searchText.trim().length < 3) return;
-        if (searchDebounce.current) clearTimeout(searchDebounce.current);
-
-        searchDebounce.current = setTimeout(async () => {
-            try {
-                const query = encodeURIComponent(searchText);
-                const res = await fetch(
-                    `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${import.meta.env.VITE_MAPBOX_TOKEN}&limit=1`
-                );
-                const json = await res.json();
-                const [lng, lat] = json.features?.[0]?.center || [];
-
-                if (lng && lat) {
-                    attMapRef.current?.jumpTo({ center: [lng, lat], zoom: 16 });
-                }
-            } catch (err) {
-                console.error("Erro ao buscar endereço via texto:", err);
-            }
-        }, 1500);
-    }, [searchText]);
-
-    // 1 ---> Movimento do mapa retorna long/lati;
-    // 2 ---> long/lati atualiza setCoords -> retorna novo CEP;
-    const handleMapChange = async ([lng, lat]) => {
-        setCoords([lng, lat]);
-        updateForm({ longitude: lng, latitude: lat });
-
+    const change = async ([lng, lat]) => {
+        const signal = request();
+        setFormData(previous => ({ ...previous, longitude: String(lng), latitude: String(lat) }));
         try {
-            const address = await reverseGeocode(lng, lat);
-            updateForm(address);
-        } catch (err) {
-            console.error("Erro no reverse geocode:", err);
+            const address = await reverseGeocode(lng, lat, signal);
+            if (!address.cep) return;
+            const resolved = await fetchAddressByCep(address.cep.replace(/\D/g, ""), signal);
+            if (!signal.aborted) setFormData(previous => ({ ...previous, ...address, ...resolved }));
+        } catch {
+            if (!signal.aborted) setError("Não foi possível consultar o endereço. Preencha os campos manualmente.");
         }
     };
-
-    // ---> Atualização após long/lati retornar CEP
-    useEffect(() => {
-        const cep = formData.cep?.replace(/\D/g, '');
-        if (!cep || cep.length !== 8) return;
-
-        if (debounce.current) clearTimeout(debounce.current);
-        debounce.current = setTimeout(async () => {
-            try {
-                const viaCep = await fetchAddressByCep(cep);
-                updateForm(viaCep);
-            } catch (err) {
-                console.error("Erro ao buscar endereço via CEP:", err);
-            }
-        }, 500);
-    }, [formData.cep]);
-
+    const find = async () => {
+        if (search.trim().length < 3) { setError("Digite pelo menos três caracteres."); return; }
+        const signal = request();
+        setBusy(true);
+        try {
+            const response = await fetch("https://api.mapbox.com/geocoding/v5/mapbox.places/" +
+                encodeURIComponent(search.trim()) + ".json?access_token=" + import.meta.env.VITE_MAPBOX_TOKEN + "&limit=1&country=br", { signal });
+            if (!response.ok) throw new Error("geocoding");
+            const json = await response.json();
+            const center = json.features?.[0]?.center;
+            if (!center) { setError("Endereço não encontrado. Use os campos manuais."); return; }
+            if (!signal.aborted) mapRef.current?.jumpTo({ center });
+        } catch {
+            if (!signal.aborted) setError("Consulta indisponível. Use os campos manuais.");
+        } finally { if (!signal.aborted) setBusy(false); }
+    };
     return (
-        <div className={style}>
-            <input
-                type="text"
-                placeholder="Buscar local e centralizar no mapa (rua, bairro, cidade...)"
-                value={searchText}
-                onChange={e => setSearchText(e.target.value)}
-                style={{ zIndex: 11 }}
-            />
-            <MapInput
-                ref={attMapRef}
-                coords={coords}
-                onChange={handleMapChange}
-                isDefaultCoords={isDefaultCoords}
-                style={{ zIndex: 10 }}
-            />
-        </div>
+        <section className={style.optionalMap}>
+            <div className={style.search}>
+                <input aria-label="Buscar no mapa" value={search} onChange={event => setSearch(event.target.value)}
+                    placeholder="Rua, bairro ou cidade" onKeyDown={event => { if (event.key === "Enter") { event.preventDefault(); find(); } }} />
+                <button type="button" onClick={find} disabled={busy}>{busy ? "Buscando…" : "Buscar"}</button>
+            </div>
+            <p>Recurso opcional: consulta Mapbox e ViaCEP. Mover o mapa pode preencher o endereço.</p>
+            <div className={style.map}><MapInput ref={mapRef} coords={coords} onChange={change}
+                onError={() => setError("Mapa indisponível. Você pode continuar preenchendo manualmente.")} /></div>
+            {error && <p role="status">{error}</p>}
+        </section>
     );
 }
-
-export default Step2Container;

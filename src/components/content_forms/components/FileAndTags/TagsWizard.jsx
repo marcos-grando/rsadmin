@@ -31,6 +31,8 @@ function TagsWizard({ formData, setFormData, currentInfos, setCurrentInfos, the_
                 <div className={styles.inputTags}>
                     <input
                         type="text"
+                        aria-label={the_label}
+                        onKeyDown={event => { if (event.key === "Enter") { event.preventDefault(); handleAddInfo(); } }}
                         value={currentInfos}
                         placeholder={the_placeholder}
                         onChange={e => setCurrentInfos(e.target.value)}
@@ -46,6 +48,7 @@ function TagsWizard({ formData, setFormData, currentInfos, setCurrentInfos, the_
                         <button
                             type="button"
                             className={styles.removeTag}
+                            aria-label={"Remover característica " + tag}
                             onClick={() => handleRemoveInfo(i)}
                         >
                             <IconRemove />

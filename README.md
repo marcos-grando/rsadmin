@@ -1,110 +1,35 @@
-# RSAdmin
+# RS Simulador
 
-Sistema criado utilizando React, Vite, Node.js (Express), com banco de dados Supabase.
-OBS: --> Ainda sem versão mobile! <--
+Aplicação estática de estudo para montar um objeto temporário de imóvel. Não é um painel administrativo e não possui conexão com o site da corretora.
 
-## Servidores instanciados no projeto
+## Executar
 
-Na execução do projeto é instanciado dois servidores: um backend utilizando Express (Node.js) e um frontend com React (Vite).
+Requisitos: Node.js 20.19+ e npm.
 
-- Express (Node.js):
-  - Servidor estrutrado para lidar diretamente com as rotas da API (`app.js`);
-  - Integra com banco de dados Supabase (`supbaseClient.server.js`);
-  - Lida com arquivos via Multer;
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-├── api/                                   # centraliza as apis (Vercel)
-│   └── index.js                           # repassa para app.js (app, { basePath: '/api' })
-├── server/                                # todas as apis reais
-│   ├── auth/                              # apis de autênticação
-│   ├── supabase/                          # apis de crud
-├── helpers/                               # funções auxiliares/helpers
-│   ├── clients/                           # instanciamento do servidor cloudinary/supabase
-│   ├── cloudinary/                        # upload/delete de imagens
-│   └── util/                              # funções úteis no geral
-├── src/                                   # frontend (React + Vite)
-├── app.js                                 # todas rotas declaradas
-└── .env.example                           # Como deve ficar .env
-```
-
----
-
-## 🌐 Variáveis de Ambiente (.env)
-
-| Variável              | Uso                       |
-| --------------------- | ------------------------- |
-| NODE_ENV              | Ambiente (dev/prod)       |
-| PORT                  | Porta local (dev)         |
-| CORS_ORIGIN           | CORS do front             |
-| ADMIN_PASSWORD_HASH   | Senha admin (bcrypt hash) |
-| JWT_ACCESS_SECRET     | JWT access                |
-| JWT_REFRESH_SECRET    | JWT refresh               |
-| SUPABASE_URL          | Supabase URL              |
-| SUPABASE_KEY          | Supabase Key              |
-| CLOUDINARY_CLOUD_NAME | Cloudinary Name           |
-| CLOUDINARY_API_KEY    | Cloudinary Key            |
-| CLOUDINARY_API_SECRET | Cloudinary secret         |
-| VITE_MAPBOX_TOKEN     | Mapbox (frontend)         |
-
-- Usar `dotenv` para carregar no backend.
-- As variáveis são acessadas pelo React via `import.meta.env`.
-- Usar .env.example como modelo.
-
----
-## ⚙️ Execução do Projeto
-
-### Desenvolvimento local
-
-```bash
-npm install
+```sh
+npm ci
 npm run dev
 ```
 
-O comando (`npm run dev`) executa simultaneamente:
-- Express na porta `3000` (API local);
-- Vite na porta `5173` (React);
+`npm run build` gera `dist/`; `npm run preview` serve o build local. `npm test` valida o modelo e `npm run lint` verifica o código.
 
-Requisição para `/api` são redirecionadas para o backend via proxy:
-```js
-    server: {
-        proxy: {
-            '/api': {
-                target: 'http://localhost:3000',
-            }
-        }
-    }
-```
+## Funcionamento
 
-Execução simultânea devido (`package.json`) com 'concurrently':
-```json
-"scripts": {
-  "dev": "concurrently -k \"npm:dev:server\" \"npm:dev:client\"",
-  "dev:server": "node server.js",
-  "dev:client": "vite",
-  "build": "vite build",
-  "preview": "vite preview"
-}
-```
+1. Preencha as sete etapas: básico, endereço, detalhes, apartamentos, condomínio, plantas e imagem principal.
+2. Os tipos, construtoras e situações são opções fictícias do próprio simulador.
+3. Imagens são arquivos locais, sem upload. Cada galeria aceita até 20 imagens de até 10 MB (JPEG, PNG, WebP, GIF ou AVIF).
+4. `Gerar objeto` apresenta a prévia e o JSON. `Voltar ao formulário` permite ajustar a mesma simulação; `Reiniciar` descarta os dados.
+5. Tudo fica na memória da página. Recarregar ou fechar a aba apaga os dados; não há rascunho persistente ou catálogo compartilhado.
+6. O JSON copiado contém metadados dos arquivos, não os bytes das imagens nem endereços blob reutilizáveis. Não é uma exportação completa para outro site.
 
----
+## Endereço e mapa
 
-## ✅ Tecnologias e Bibliotecas
+O endereço pode ser preenchido manualmente, sem serviços externos. Coordenadas são opcionais.
 
-- React + Vite
-- Express
-- Supabase
-- Multer
-- Cloudinary
-- Dotenv
-- Concurrently
+Para habilitar o mapa, configure apenas o token público `VITE_MAPBOX_TOKEN` conforme `.env.example`. O mapa carrega exclusivamente quando solicitado e consulta Mapbox/ViaCEP. Falhas nesses serviços não impedem o preenchimento manual.
 
----
+## Independência
 
-## 📌 Observações
+Não existem backend Express, login administrativo, CRUD remoto, SDK do Supabase, upload/exclusão no Cloudinary ou vínculo com `rscorretora`. A hospedagem entrega apenas arquivos estáticos; rotas `/api/*` retornam 404.
 
-- Esse é um projeto piloto e está em desenvolvimento.
-- Maior parte do projeto foi desenvolvido utilizando ferramentas novas para mim (exceto o Frontend puro).
+Não adicione chaves privadas em variáveis `VITE_*`: essas variáveis entram no código público. O histórico do projeto registra a antiga implementação; ela não deve ser implantada novamente com credenciais reais.

@@ -1,30 +1,14 @@
-import React from "react";
 import { updateWithPath } from "./utility/utility";
 import CustomSelect from "./TypesInputs/CustomSelect";
 import FileUnique from "./TypesInputs/FileUnique";
 
-function TypesInputs({ formData, setFormData, ...each }) {
-
-    const { the_type, the_path, the_opts, inputProps: getInputProps } = each;
-
-    // Atualiza formData no key correta usando "the_path" definido em fieldTitleForms.js;
-    const updateFunc = val => updateWithPath(setFormData, the_path, val);
-
-    // Garante que o inputProps definido em fieldTitleForms.js seja uma função;
-    const props = typeof getInputProps === 'function' ? getInputProps(formData, updateFunc) : {};
-
-    switch (the_type) {
-
-        case 'select':
-            return <CustomSelect {...props} options={the_opts} />;
-
-        case 'file_unique':
-            const file = the_path.reduce((o, k) => o?.[k], formData);
-            return <FileUnique file={file} pathname={the_path.at(-1)} {...props} />;
-
-        default:
-            return <input type={the_type} {...props} />;
-    };
-};
-
-export default TypesInputs;
+export default function TypesInputs({ formData, setFormData, ...each }) {
+    const { the_type, the_path, the_opts, inputProps: getInputProps, the_label } = each;
+    const updateFunc = value => updateWithPath(setFormData, the_path, value);
+    const props = typeof getInputProps === "function" ? getInputProps(formData, updateFunc) : {};
+    const name = the_path.join(".");
+    if (the_type === "select") return <CustomSelect {...props} pathname={name} label={the_label} options={the_opts} />;
+    if (the_type === "file_unique") return <FileUnique file={the_path.reduce((o, k) => o?.[k], formData)}
+        pathname={name} label={the_label} {...props} />;
+    return <input type={the_type} id={name} name={name} aria-label={the_label} {...props} />;
+}

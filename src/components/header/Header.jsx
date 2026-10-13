@@ -1,23 +1,14 @@
-import React from "react";
 import style from "./Header.module.scss";
-import { LogOut } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useSidebar } from "../../utilities/contexts/ContextAside";
-import { logout } from "../../auth/authLogin";
 
-function Header() {
-
+export default function Header() {
     const { setShowAside } = useSidebar();
-
     return (
         <header className={style.header}>
-            <h2>RS Administração</h2>
-            <button type="button"
-            className={style.quit}
-            onClick={logout}>
-                <LogOut />
-            </button>
+            <h2>RS Simulador</h2>
+            <button type="button" className={style.quit} aria-label="Abrir ou fechar menu"
+                onClick={() => setShowAside(previous => !previous)}><Menu /></button>
         </header>
-    )
+    );
 }
-
-export default Header;

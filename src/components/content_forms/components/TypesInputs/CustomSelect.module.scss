@@ -32,6 +32,7 @@ $distanceTxtInput: 7px;
 
     button {
         background: none;
+        color: inherit;
         border: none; outline: none;
         height: 100%; width: 100%;
         padding: 8px;
@@ -49,10 +50,13 @@ $distanceTxtInput: 7px;
     flex-direction: column;
 
     position: absolute;
+    z-index: 30;
     top: 2.2rem;
     overflow-y: auto;
 
     .option {
+        flex-shrink: 0;
+        height: auto;
         padding: 5px 8px;
         font-size: 14px;
 

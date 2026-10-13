@@ -1,50 +1,27 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 import style from "./CustomSelect.module.scss";
 
-function CustomSelect({ options = [], pathname, value, onChange, required, disabled, }) {
+export default function CustomSelect({ options = [], pathname, label, value, onChange, disabled }) {
     const [open, setOpen] = useState(false);
     const ref = useRef(null);
-
     useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (ref.current && !ref.current.contains(e.target)) setOpen(false);
-        };
-        document.addEventListener('pointerdown', handleClickOutside, true);
-        return () => document.removeEventListener('pointerdown', handleClickOutside, true);
+        const outside = event => { if (!ref.current?.contains(event.target)) setOpen(false); };
+        document.addEventListener("pointerdown", outside, true);
+        return () => document.removeEventListener("pointerdown", outside, true);
     }, []);
-
-    const handleSelect = (opt) => {
-        onChange(opt.id);
-        setTimeout(() => setOpen(false), 100);
-    };
-    const selected = options.find(o => o.id === value);
-
-    // Estilos definidos em style/Steps.scss;
+    const selected = options.find(option => option.id === value);
     return (
-        <div ref={ref} className={`${style.customSelect} ${disabled ? style.disabled : ''}`} role="listbox" aria-expanded={open}>
-
-            <input type="hidden" name={pathname} value={value ?? ''} />
-
-            <button type="button" onClick={() => !disabled && setOpen(!open)} disabled={disabled} aria-disabled={disabled}>
-                {selected?.name || '-- Selecione --'}
-            </button>
-
-            {open && !disabled && (
-                <div className={style.customOptions}>
-                    {options.map(opt => (
-                        <div
-                            key={opt.id} role="option"
-                            aria-selected={opt.id === value}
-                            className={`${style.option} ${opt.id === value ? style.selected : ''}`}
-                            onClick={() => handleSelect(opt)}
-                        >
-                            {opt.name}
-                        </div>
-                    ))}
-                </div>
-            )}
+        <div ref={ref} className={style.customSelect + (disabled ? " " + style.disabled : "")}
+            onKeyDown={event => { if (event.key === "Escape") setOpen(false); }}>
+            <input type="hidden" name={pathname} value={value ?? ""} />
+            <button type="button" aria-label={label} aria-haspopup="listbox" aria-expanded={open} disabled={disabled}
+                onClick={() => setOpen(!open)}>{selected?.name || "-- Selecione --"}</button>
+            {open && !disabled && <div className={style.customOptions} role="listbox" aria-label={label}>
+                {options.map(option => <button key={option.id} type="button" role="option"
+                    aria-selected={option.id === value}
+                    className={style.option + (option.id === value ? " " + style.selected : "")}
+                    onClick={() => { onChange(option.id); setOpen(false); ref.current.querySelector("button")?.focus(); }}>{option.name}</button>)}
+            </div>}
         </div>
     );
 }
-
-export default CustomSelect;

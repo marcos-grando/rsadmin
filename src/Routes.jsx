@@ -1,28 +1,11 @@
-import React, { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
-import Loading from "./components/loadings/Loading";
-import Config from "./pages/config/Configs";
-const ListConst = lazy(() => import("./pages/list_const/ListConst"));
-const Home = lazy(() => import("./pages/home/Home"));
-const ListAll = lazy(() => import("./pages/list_all/ListAll"));
-const GeralList = lazy(() => import("./pages/list_geral/GeralList"));
+import { Routes, Route, Navigate } from "react-router-dom";
+import Simulator from "./pages/simulator/Simulator";
 
-function AppRoutes() {
+export default function AppRoutes() {
     return (
-        <Suspense fallback={<Loading />}>
-            <Routes>
-                <Route path="/" element={<Home />} />
-
-                <Route path="/todos-imoveis" element={<ListAll />} />
-                <Route path="/residenciais" element={<ListConst />} />
-                <Route path="/:slug" element={<GeralList />} />
-
-                <Route path="/config" element={<Config />} />
-
-                <Route path="*" element={<Home />} />
-            </Routes>
-        </Suspense>
+        <Routes>
+            <Route path="/" element={<Simulator />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
     );
 }
-
-export default AppRoutes;

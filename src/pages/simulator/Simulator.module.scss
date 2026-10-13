@@ -1,0 +1,83 @@
+.simulator {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    color: var(--secondary-2);
+}
+
+.simulator .intro {
+    background: var(--terciary-1);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    h1 { font-size: 1.15rem; }
+    p { margin-top: 0.4rem; font-size: 0.85rem; line-height: 1.5; color: var(--secondary-3); }
+}
+
+.simulator .intro, .simulator .result {
+    button {
+        background: var(--atrative-3);
+        border: 1px solid var(--secondary-5);
+        border-radius: 6px;
+        padding: 0.6rem 1rem;
+        color: var(--secondary-1);
+        font: inherit;
+        cursor: pointer;
+        white-space: nowrap;
+        &:hover { background: var(--atrative-1); }
+        &:focus-visible { outline: 2px solid var(--secondary-2); outline-offset: 2px; }
+    }
+}
+
+.simulator .result {
+    min-height: 0;
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    p { line-height: 1.5; }
+    .actions {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        h2 { margin-right: auto; font-size: 1.2rem; }
+    }
+    .summary {
+        margin: 1.5rem 0;
+        display: grid;
+        grid-template-columns: minmax(250px, 400px) 1fr;
+        align-items: start;
+        gap: 2rem;
+        h3 { margin-bottom: 0.5rem; }
+    }
+    figure {
+        margin-top: 1rem;
+        img { width: 100%; max-width: 300px; max-height: 240px; object-fit: contain; border-radius: 6px; }
+        figcaption { margin-top: 0.4rem; font-size: 0.85rem; overflow-wrap: anywhere; }
+    }
+    .gallery {
+        margin: 1.5rem 0;
+        > div { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    }
+    pre {
+        background: var(--primary-1);
+        border: 1px solid var(--secondary-5);
+        border-radius: 8px;
+        max-height: 600px;
+        padding: 1.25rem;
+        color: var(--secondary-2);
+        font-size: 0.8rem;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 700px) {
+    .simulator .intro { padding: 0.9rem 1rem; align-items: flex-start; h1 { font-size: 1rem; } }
+    .simulator .result {
+        padding: 1rem;
+        .summary { grid-template-columns: 1fr; gap: 1rem; }
+    }
+}

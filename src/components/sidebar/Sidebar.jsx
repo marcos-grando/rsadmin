@@ -90,7 +90,7 @@ function Sidebar() {
                 </div>
                 <div className={`${style.theTitle} ${showAside ? style.open : style.closed}`}>
                     <h1>RS</h1>
-                    <p>Admin</p>
+                    <p>Simulador</p>
                 </div>
                 {openAside &&
                     <SidebarContent setShowAside={setShowAside} style={style} isMob={isMob} />

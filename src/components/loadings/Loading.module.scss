@@ -29,7 +29,7 @@
             transform: skewX(-25deg);
             opacity: 0.15;
 
-            pointer-events: none;  /* não atrapalha cliques */
+            pointer-events: none;
             animation: shadowInline 3s ease-in-out infinite;
         }
         .loading {

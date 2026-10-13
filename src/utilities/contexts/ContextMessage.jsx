@@ -1,5 +1,4 @@
-import { createContext, useCallback, useContext, useRef, useState } from "react";
-// context controlar o render de src/components/Message.jsx em src/App.jsx;
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 const MessageContext = createContext();
 
@@ -10,17 +9,22 @@ function ContextMessage({ children }) {
     const [closeAnimated, setCloseAnimated] = useState(false);
 
     const timerRef = useRef(null);
+    const closingRef = useRef(null);
+
+    useEffect(() => () => { clearTimeout(timerRef.current); clearTimeout(closingRef.current); }, []);
 
     const openWindow = useCallback(() => {
+        clearTimeout(closingRef.current);
         setCloseAnimated(false);
         setVisible(true);
     }, []);
 
     const closeWindow = useCallback(() => {
         clearTimeout(timerRef.current);
+        clearTimeout(closingRef.current);
         setCloseAnimated(true);
 
-        setTimeout(() => {
+        closingRef.current = setTimeout(() => {
             setCloseAnimated(false);
             setVisible(false);
         }, 550);
@@ -35,7 +39,7 @@ function ContextMessage({ children }) {
         timerRef.current = setTimeout(() => {
             closeWindow();
         }, duration);
-    }, [closeWindow]);
+    }, [closeWindow, openWindow]);
 
     const value = { showMessage, closeWindow, visible, message, closeAnimated }
     // message => type: sucess/error/warning, content: conteúdo/mensagem;

@@ -37,6 +37,8 @@
 }
 
 .sidebar {
+    font-family: system-ui, sans-serif;
+    color: var(--secondary-2);
     background-color: $sidebar_bg;
     box-shadow: 0 0 10px var(--terciary-4);
     border-right: 1px solid $components_border;

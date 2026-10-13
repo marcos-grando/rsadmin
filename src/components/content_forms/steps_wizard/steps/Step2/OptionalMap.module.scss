@@ -1,0 +1,20 @@
+.optionalMap {
+    margin-top: 1rem;
+    p { margin: 0.5rem 0; font-size: 0.8rem; line-height: 1.4; }
+}
+
+.optionalMap .search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    input { min-width: 0; flex: 1; margin: 0; }
+    button { padding: 0.5rem; }
+}
+
+.optionalMap .map {
+    border: 1px solid var(--secondary-5);
+    border-radius: 6px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}

@@ -25,6 +25,8 @@
 }
 
 .messageWindow {
+    max-width: calc(100vw - 2rem);
+    font-family: system-ui, sans-serif;
     background-color: var(--primary-1);
     border: 2px solid;
     border-radius: 15px;
@@ -63,6 +65,18 @@
             background: linear-gradient(180deg, var(--error), transparent);
             h2, span { color: var(--txtError); }    
         }
+    }
+
+    .closeButton {
+        background: transparent;
+        border: none;
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        cursor: pointer;
+        svg { position: static; display: block; }
     }
 
     svg {

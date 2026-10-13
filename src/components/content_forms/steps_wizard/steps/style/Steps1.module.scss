@@ -141,3 +141,19 @@ $distanceTxtInput: 7px;
         }
     }
 }
+
+@media (max-width: 700px) {
+    .step1 {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        grid-auto-rows: minmax(65px, auto);
+        .theInput:not(:last-of-type) { grid-column: 1; }
+        .theInput:last-of-type {
+            grid-column: 1;
+            grid-row: auto;
+            height: 280px;
+            label > div::after { max-width: 90%; padding: 0.75rem; font-size: 0.75rem; }
+        }
+    }
+}

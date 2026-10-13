@@ -2,10 +2,10 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
 // Ao mover o mapa retorna (lng, lat), encontrando o CEP via geocoding;
 // Valor do CEP é enviado para fetchAddressByCep();
-export async function reverseGeocode(lng, lat) {
+export async function reverseGeocode(lng, lat, signal) {
 
     const res = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${MAPBOX_TOKEN}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${MAPBOX_TOKEN}`, { signal }
     );
     if (!res.ok) throw new Error('Erro ao fazer reverse geocode');
     const data = await res.json();
@@ -31,9 +31,9 @@ export async function reverseGeocode(lng, lat) {
 
 // Recebe o valor do CEP e retorna dados do endereço através do ViaCep;
 // Por fim, seus valores são usados no formData;
-export async function fetchAddressByCep(cep) {
+export async function fetchAddressByCep(cep, signal) {
 
-    const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal });
     if (!res.ok) throw new Error('Erro ao buscar CEP via ViaCEP');
     const data = await res.json();
 

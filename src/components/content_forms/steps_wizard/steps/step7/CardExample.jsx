@@ -1,10 +1,10 @@
-import React from "react";
+import useObjectURL from "../../../../../utilities/hooks/useObjectURL";
 import style from './CardExample.module.scss';
 import { Car, Bed, Bath } from "lucide-react";
 
 function CardExample({ formData, statusName }) {
 
-    const file = formData?.thumb?.url;
+    const preview = useObjectURL(formData?.thumb?.url);
 
     const formatBrl = (valor) => {
         if (!valor) return 'R$ 0,00';
@@ -29,7 +29,7 @@ function CardExample({ formData, statusName }) {
         <div className={style.exampleItem}>
 
             {formData?.thumb?.url &&
-                <img src={file instanceof File ? URL.createObjectURL(file) : file} alt="preview" />
+                <img src={preview || undefined} alt={formData.name || "Prévia do imóvel"} />
             }
 
             <div className={style.item}>

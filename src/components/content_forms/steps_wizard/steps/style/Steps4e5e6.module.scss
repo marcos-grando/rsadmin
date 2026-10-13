@@ -345,3 +345,26 @@ $distanceTxtInput: 7px;
         }
     }
 }
+
+@media (max-width: 700px) {
+    .fileAndTags {
+        padding: 1rem;
+        .tagsSection .tagsDiv .inputTags {
+            gap: 0;
+            input { min-width: 0; }
+            button { padding: 0 0.75rem; font-size: 0.75rem; white-space: normal; }
+        }
+        .fileSection {
+            .fileDiv .fileInput::after { max-width: 90%; padding: 0.75rem; }
+            .previewList {
+                grid-template-columns: 1fr !important;
+                .previewItem {
+                    padding: 0.75rem;
+                    .previewImg { width: 90px; flex-shrink: 0; }
+                    .previewInfos { min-width: 0; input, textarea { min-width: 0; width: 100%; } }
+                    button { flex-shrink: 0; }
+                }
+            }
+        }
+    }
+}

@@ -1,12 +1,11 @@
 import React from "react";
 import { AppWindow } from "lucide-react";
 import style from "../styles/NavsStyle.module.scss";
-import Linkto from "../../../utilities/util/Linkto";
 import LiOpt from "./LiOpt";
 
 function NavInit({ setShowAside, liActive, setLiActive, isMob }) {
     // opt, icon, into, setShowAside, isMob, liActive, setLiActive
-    const info = { opt: "Dashboard", icon: <AppWindow />, into: Linkto({ type: "home" }) };
+    const info = { opt: "Simulador", icon: <AppWindow />, into: "/" };
 
     return (
         <nav className={style.init}>

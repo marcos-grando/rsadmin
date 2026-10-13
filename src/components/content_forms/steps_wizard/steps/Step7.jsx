@@ -1,34 +1,13 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React from "react";
 import style from "./style/Steps7.module.scss";
-import { validateStep } from "../../components/utility/validateStep";
-import { useListTablesMinor } from "../../../../utilities/hooks/useListTablesMinor";
+import { simulatorOptions } from "../../../../data/simulatorOptions";
 import TypesInputs from "../../components/TypesInputs";
 import TheTitleLabel from "../../components/TheTitleLabel";
 import CardExample from "./step7/CardExample";
 
-function Step7({ THE_STEP, setStatus, formData, setFormData, alterProps }) {
+function Step7({ THE_STEP, formData, setFormData, alterProps }) {
 
-    useEffect(() => {
-        const stepStatus = validateStep(formData, THE_STEP);
-        setStatus(prev => ({ ...prev, 7: stepStatus }))
-    }, [formData]);
-
-    // No formData tenho apenas o status_id e o utilizo em 'statusMap;
-    // Identificando seu nome em opts_status, armazenando no State;
-    const [statusName, setStatusName] = useState(null);
-    const { opts_status } = useListTablesMinor();
-
-    const statusMap = useMemo(() => {
-        const map = {};
-        opts_status.forEach(each => {
-            if (each?.id != null) { map[each.id] = each.name; }
-        });
-        return map;
-    }, [opts_status]);
-
-    useEffect(() => {
-        setStatusName(statusMap[formData?.status_id] || null);
-    }, [formData?.status_id, statusMap]);
+    const statusName = simulatorOptions.opts_status.find(option => option.id === formData.status_id)?.name ?? "";
 
     return (
         <div className={`step ${style?.step7}`}>

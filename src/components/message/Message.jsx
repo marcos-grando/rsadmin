@@ -9,7 +9,7 @@ function Message() {
 
     return (
         <div className={`${style.messageWindow} ${closeAnimated ? style.closeWindow : ""}`} style={{ borderColor: `var(--${message?.type})` }}>
-            <IconCloseWindow onClick={() => closeWindow()} />
+            <button className={style.closeButton} type="button" aria-label="Fechar aviso" onClick={closeWindow}><IconCloseWindow /></button>
             <div className={`${style.content} ${style?.[message.type]}`} >
                 {message.content}
             </div>
